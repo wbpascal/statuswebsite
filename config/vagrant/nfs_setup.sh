@@ -10,8 +10,8 @@ exportfs -a
 /etc/init.d/nfs-kernel-server reload
 
 echo "===== Adding nfs client to cluster"
-kubectl create ns nfs-client
-helm install --name nfs-client --namespace nfs \
+kubectl create ns nfs
+helm install --name nfs-client --namespace nfs --wait \
      --set nfs.server=127.0.0.1 \
 	 --set rbac.create=false \
 	 --set storageClass.defaultClass=true \

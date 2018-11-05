@@ -2,8 +2,16 @@
 
 echo "=== Begin Vagrant Provisioning using 'config/vagrant/influxdb_setup.sh'"
 
+echo "==== Creating persistant volumes for InfluxDB"
+sudo mkdir -p /kubernetes/influxdb
+kubectl apply -f /vagrant/config/influxdb/persistant_volumes.yml
+
 echo "===== Adding InfluxDB to cluster"
-kubectl create ns influxdb
-helm install --name global-influxdb --namespace influxdb stable/influxdb
+helm install --name influxdb --wait \
+             --set persistence.enabled=true \
+			 --set persistence.storageClass=influxdb \
+			 --set persistence.size=1Gi \
+			 --set setDefaultUser.user.password=password \
+			 stable/influxdb
 
 echo "=== End Vagrant Provisioning using 'config/vagrant/influxdb_setup.sh'"

@@ -16,11 +16,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :shell, path: 'config/vagrant/build_dependency_setup.sh'
   config.vm.provision :shell, path: 'config/vagrant/git_setup.sh'
   config.vm.provision :shell, path: 'config/vagrant/helm_setup.sh'
-  # config.vm.provision :shell, path: 'config/vagrant/istio_setup.sh'
   config.vm.provision :shell, path: 'config/vagrant/docker_registry_setup.sh'
   config.vm.provision :shell, path: 'config/vagrant/nfs_setup.sh'
   config.vm.provision :shell, path: 'config/vagrant/kafka_setup.sh'
   config.vm.provision :shell, path: 'config/vagrant/influxdb_setup.sh'
+  config.vm.provision :shell, path: 'config/vagrant/postgresql_setup.sh'
+  # config.vm.provision :shell, path: 'config/vagrant/icinga_setup.sh'
   config.vm.provision :shell, path: 'config/vagrant/skaffold_setup.sh'
   
   config.vm.network :forwarded_port, host: 3000, guest: 3000

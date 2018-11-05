@@ -24,7 +24,7 @@ config :phoenix, :json_library, Jason
 
 config :kafka_ex,
   brokers: [
-    {"global-kafka.kafka", 9092},
+    {"kafka", 9092},
   ],
   sync_timeout: 3000,
   max_restarts: 10,

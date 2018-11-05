@@ -11,6 +11,7 @@ helm install --name influxdb --wait \
              --set persistence.enabled=true \
 			 --set persistence.storageClass=influxdb \
 			 --set persistence.size=1Gi \
+			 --set setDefaultUser.enabled=true \
 			 --set setDefaultUser.user.password=password \
 			 stable/influxdb
 

@@ -4,6 +4,7 @@ echo "=== Begin Vagrant Provisioning using 'config/vagrant/nfs_setup.sh'"
 
 echo "===== Setup NFS server"
 sudo mkdir -p /kubernetes
+sudo chmod 777 -R /kubernetes
 sudo apt-get install -y nfs-kernel-server portmap
 echo "/kubernetes 0.0.0.0/0.0.0.0(rw,no_root_squash,subtree_check)" >> /etc/exports
 exportfs -a

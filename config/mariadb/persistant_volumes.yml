@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: postgresql-pv-0
+  name: mariadb-pv-0
 spec:
   capacity:
     storage: 1Gi
@@ -9,10 +9,10 @@ spec:
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Recycle
-  storageClassName: postgresql
+  storageClassName: mariadb
   mountOptions:
     - hard
     - nfsvers=4.1
   nfs:
-    path: /kubernetes/postgresql
+    path: /kubernetes/mariadb
     server: 127.0.0.1

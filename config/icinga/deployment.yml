@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: icinga-deployment
+  labels:
+    app: icinga
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: icinga
+  template:
+    metadata:
+      labels:
+        app: icinga
+    spec:
+      containers:
+      - name: icinga
+        image: jordan/icinga2:2.9.0
+        env:
+        - name: DEFAULT_MYSQL_HOST
+          value: mariadb-mariadb
+        - name: DEFAULT_MYSQL_USER
+          value: maria
+        - name: DEFAULT_MYSQL_PASS
+          value: maria
+        - name: MYSQL_ROOT_PASSWORD
+          value: root
+        ports:
+        - containerPort: 80
+        - containerPort: 443
+        - containerPort: 5665

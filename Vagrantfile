@@ -20,13 +20,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :shell, path: 'config/vagrant/nfs_setup.sh'
   config.vm.provision :shell, path: 'config/vagrant/kafka_setup.sh'
   config.vm.provision :shell, path: 'config/vagrant/influxdb_setup.sh'
-  config.vm.provision :shell, path: 'config/vagrant/postgresql_setup.sh'
-  # config.vm.provision :shell, path: 'config/vagrant/icinga_setup.sh'
+  config.vm.provision :shell, path: 'config/vagrant/mariadb_setup.sh'
+  config.vm.provision :shell, path: 'config/vagrant/icinga_setup.sh'
   config.vm.provision :shell, path: 'config/vagrant/skaffold_setup.sh'
   
   config.vm.network :forwarded_port, host: 3000, guest: 3000
   config.vm.network :forwarded_port, host: 8080, guest: 8080
   config.vm.network :forwarded_port, host: 8081, guest: 8081
+  
+  for i in 30000..32767
+    config.vm.network :forwarded_port, guest: i, host: i
+  end
   
   config.vm.provider "virtualbox" do |v|
     v.cpus = 4

@@ -6,6 +6,7 @@ echo "==== Creating persistant volumes for Kafka"
 sudo mkdir -p /kubernetes/kafka/broker0
 sudo mkdir -p /kubernetes/kafka/broker1
 sudo mkdir -p /kubernetes/kafka/broker2
+sudo chmod 777 -R /kubernetes/kafka
 kubectl apply -f /vagrant/config/kafka/persistant_volumes.yml
 
 echo "===== Adding Kafka to cluster"

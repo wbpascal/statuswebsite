@@ -4,6 +4,7 @@ echo "=== Begin Vagrant Provisioning using 'config/vagrant/influxdb_setup.sh'"
 
 echo "==== Creating persistant volumes for InfluxDB"
 sudo mkdir -p /kubernetes/influxdb
+sudo chmod 777 /kubernetes/influxdb
 kubectl apply -f /vagrant/config/influxdb/persistant_volumes.yml
 
 echo "===== Adding InfluxDB to cluster"

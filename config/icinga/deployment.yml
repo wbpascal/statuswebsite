@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: icinga
-        image: jordan/icinga2:2.9.0
+        image: localhost:5000/icinga2
         env:
         - name: DEFAULT_MYSQL_HOST
           value: mariadb-mariadb
@@ -26,6 +26,14 @@ spec:
           value: maria
         - name: MYSQL_ROOT_PASSWORD
           value: root
+        - name: ICINGA2_FEATURE_INFLUXDB
+          value: "true"
+        - name: ICINGA2_FEATURE_INFLUXDB_HOST
+          value: influxdb-influxdb
+        - name: ICINGA2_FEATURE_INFLUXDB_USER
+          value: icinga2
+        - name: ICINGA2_FEATURE_INFLUXDB_PASS
+          value: icinga
         ports:
         - containerPort: 80
         - containerPort: 443

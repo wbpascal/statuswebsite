@@ -15,5 +15,9 @@ helm install --name influxdb --wait \
 			 --set setDefaultUser.enabled=true \
 			 --set setDefaultUser.user.password=password \
 			 stable/influxdb
+			 
+kubectl exec $(kubectl get pods --namespace default -l app=influxdb-influxdb -o jsonpath='{.items[0].metadata.name}') -- influx -execute 'create database icinga2'
+kubectl exec $(kubectl get pods --namespace default -l app=influxdb-influxdb -o jsonpath='{.items[0].metadata.name}') -- influx -execute "create user icinga2 with password 'icinga'"
+kubectl exec $(kubectl get pods --namespace default -l app=influxdb-influxdb -o jsonpath='{.items[0].metadata.name}') -- influx -execute 'grant all on icinga2 to icinga2'
 
 echo "=== End Vagrant Provisioning using 'config/vagrant/influxdb_setup.sh'"

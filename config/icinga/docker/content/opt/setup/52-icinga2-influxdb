@@ -1,0 +1,44 @@
+#!/bin/bash
+
+. /opt/helpers
+
+# InfluxDB writer
+if evaluate_boolean "${ICINGA2_FEATURE_INFLUXDB}"; then
+	echo "=> Enabling Icinga2 influxdb writer"
+
+	icinga2 feature enable influxdb
+
+	cat >/etc/icinga2/features-available/influxdb.conf <<-END
+	object InfluxdbWriter "influxdb" {
+		host = "$ICINGA2_FEATURE_INFLUXDB_HOST"
+		port = $ICINGA2_FEATURE_INFLUXDB_PORT
+		database = "$ICINGA2_FEATURE_INFLUXDB_DB"
+		username = "$ICINGA2_FEATURE_INFLUXDB_USER"
+		password = "$ICINGA2_FEATURE_INFLUXDB_PASS"
+
+		host_template = {
+			measurement = "\$host.check_command\$"
+			tags = {
+				hostname = "\$host.name\$"
+			}
+		}
+
+		service_template = {
+			measurement = "\$service.check_command\$"
+			tags = {
+				hostname = "\$host.name\$"
+				service = "\$service.name\$"
+			}
+		}
+		
+		enable_send_thresholds = true
+		enable_send_metadata = true
+	
+	}
+	END
+
+	
+else
+	# Actively disable influxdb, to not hit any weird bugs
+	icinga2 feature disable influxdb || true
+fi

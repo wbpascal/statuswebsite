@@ -13,6 +13,10 @@ Wenn die VM heruntergefahren werden soll müssen zunächst alle SSH-Sitzungen ge
 # Verfügbare Dienste in der Entwicklungs-VM
 Dank dem eingebauten DNS Server von Kubernetes können alle im Cluster der Entwicklungs-VM laufende Container folgende Dienste erreichen:
 
+### Icinga 2 API
+* Hostname: `icinga-api`
+* Port: `5665`
+
 ### InfluxDB
 * Hostname: `influxdb-influxdb`
 * Port: `8086` (api), `8088` (rpc)

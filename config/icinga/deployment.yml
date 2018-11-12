@@ -34,6 +34,8 @@ spec:
           value: icinga2
         - name: ICINGA2_FEATURE_INFLUXDB_PASS
           value: icinga
+        - name: ICINGA2_API_PASS
+          value: icinga
         ports:
         - containerPort: 80
         - containerPort: 443

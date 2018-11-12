@@ -2,6 +2,8 @@
 
 . /opt/helpers
 
+echo "=== 50-icinga2"
+
 CNFSUFFIX=icinga2
 mysql_cnf_init_section \
 	"${CNFSUFFIX}" \
@@ -35,9 +37,20 @@ chown -R nagios:root /etc/icinga2
 # enable necessary features
 icinga2 feature enable ido-mysql livestatus compatlog command
 
+if [[ ! -z "${ICINGA2_API_PASS}" ]]; then
+	cat > /etc/icinga2/conf.d/api-users.conf <<-END
+	object ApiUser "root" {
+		password = "${ICINGA2_API_PASS}"
+		permissions = ["*"]
+	}
+	END
+fi
+
 #icinga2 API cert - regenerate new private key and certificate when running in a new container
 if [ ! -f "/var/lib/icinga2/certs/$(hostname).key" ]; then
+    echo "=== start of icinga2 node setup --master"
 	icinga2 node setup --master
+    echo "=== end of icinga2 node setup --master"
 fi
 
 chfn -f "${ICINGA2_USER_FULLNAME}" nagios

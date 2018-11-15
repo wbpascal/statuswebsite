@@ -9,23 +9,6 @@ COPY mix.exs mix.exs
 
 # Download and compile dependencies
 RUN mix do deps.get, deps.compile
-
-# Install webpack dependencies
-COPY assets/.babelrc assets/
-COPY assets/package.json assets/
-COPY assets/webpack.config.js assets/
-RUN cd assets && \
-    npm install
-
-# Copy other assets to container
-COPY assets/css assets/css/
-COPY assets/js assets/js/
-COPY assets/static assets/static/
-# COPY assets/vendor assets/vendor/
-
-# Compile webpack assets
-RUN cd assets/ && \
-    npm run deploy && \
 	
 # Copy other static assets
 COPY priv/gettext priv/gettext/

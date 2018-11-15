@@ -7,7 +7,10 @@ build:
   artifacts:
   - image: localhost:5000/frontend
     context: ./frontend/
+  - image: localhost:5000/auth-service
+    context: ./auth-service/
 deploy:
   kubectl:
     manifests:
     - ./frontend/kubernetes/*
+    - ./auth-service/kubernetes/*

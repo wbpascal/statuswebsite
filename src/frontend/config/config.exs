@@ -10,7 +10,7 @@ use Mix.Config
 # Configures the endpoint
 config :frontend, FrontendWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "+UZRlCmd1hmXYhq3ZvuHkg528lkPlwHe7NbFGAu4FbfV+UH2Gj12SkWqUbrZQIEB",
+  secret_key_base: "wH4IaxpgWYAyT3nAyJfD3jCOdModIfrRjRcaG3gmUoxID7EcgiwjQO9JvC0d//TY",
   render_errors: [view: FrontendWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Frontend.PubSub, adapter: Phoenix.PubSub.PG2]
 
@@ -21,17 +21,6 @@ config :logger, :console,
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
-
-config :kafka_ex,
-  brokers: [
-    {"kafka", 9092},
-  ],
-  sync_timeout: 3000,
-  max_restarts: 10,
-  max_seconds: 60,
-  commit_interval: 5_000,
-  commit_threshold: 100,
-  kafka_version: "1.0.2"
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

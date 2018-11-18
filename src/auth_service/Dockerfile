@@ -24,4 +24,5 @@ COPY test test/
 # Compile source code
 RUN mix compile
 
+EXPOSE 80
 CMD ["mix", "phx.server"]

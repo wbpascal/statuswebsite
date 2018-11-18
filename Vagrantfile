@@ -30,7 +30,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network :forwarded_port, host: 8081, guest: 8081
   
   config.vm.network :forwarded_port, host: 30080, guest: 30080
-  config.vm.network :forwarded_port, host: 30443, guest: 30443
+  config.vm.network :forwarded_port, host: 30088, guest: 30088
   
   config.vm.provider "virtualbox" do |v|
     v.cpus = 4

@@ -9,4 +9,4 @@ use Mix.Config
 # kept out of version control and might be hard to recover
 # or recreate for your teammates (or yourself later on).
 config :frontend, FrontendWeb.Endpoint,
-  secret_key_base: "jfRymoP3uUxOA/Zbb7swQUGcR8h81TfyGi8vaZGxzDmtZ49wrrCRrUYAziqKbuMu"
+  secret_key_base: "gpt6u9HgQ4pukhN85CKIexlP/6DeMKSc3C7oASapQPUwObxLNKAkorRPzNaE/g35"

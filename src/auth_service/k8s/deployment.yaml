@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: {{build.name}}}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: {{build.name}}}
+  strategy:
+    rollingUpdate: {maxSurge: 1, maxUnavailable: 0}
+    type: RollingUpdate
+  template:
+    metadata:
+      labels: {app: {{build.name}}}
+      name: {{build.name}}
+    spec:
+      restartPolicy: Always
+      containers:
+      - image: {{build.images["Dockerfile"]}}
+        imagePullPolicy: IfNotPresent
+        name: {{build.name}}
+        resources:
+          requests:
+            memory: {{build.profile.min_memory|default(0.1)}}
+            cpu: {{build.profile.min_cpu|default(0.1)}}
+          limits:
+            memory: {{build.profile.max_memory}}
+            cpu: {{build.profile.max_cpu}}
+        ports:
+        - containerPort: 80
+        env:
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: jwt-secret
+              key: jwtsecret

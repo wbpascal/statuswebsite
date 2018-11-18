@@ -25,13 +25,13 @@ COPY assets/static assets/static/
 
 # Compile webpack assets
 RUN cd assets/ && \
-    npm run deploy && \
+    npm run deploy
 	
 # Copy other static assets
 COPY priv/gettext priv/gettext/
 	
-# Digest and compress static files
-RUN mix phx.digest
+# Digest and compress static files (Disabled atm)
+# RUN mix phx.digest
 
 # Copy source code to container
 COPY config config/
@@ -41,4 +41,5 @@ COPY test test/
 # Compile source code
 RUN mix compile
 
+EXPOSE 80
 CMD ["mix", "phx.server"]

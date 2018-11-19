@@ -23,7 +23,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :shell, path: 'config/vagrant/influxdb_setup.sh'
   config.vm.provision :shell, path: 'config/vagrant/mariadb_setup.sh'
   config.vm.provision :shell, path: 'config/vagrant/icinga_setup.sh'
-  config.vm.provision :shell, path: 'config/vagrant/skaffold_setup.sh'
+  config.vm.provision :shell, path: 'config/vagrant/forge_setup.sh'
+  config.vm.provision :shell, path: 'config/vagrant/telepresence_setup.sh'
   
   config.vm.network :forwarded_port, host: 3000, guest: 3000
   config.vm.network :forwarded_port, host: 8080, guest: 8080

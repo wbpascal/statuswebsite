@@ -8,7 +8,7 @@ metadata:
       kind:  Mapping
       name:  {{build.name}}_mapping
       prefix: /
-      service: {{build.name}}:{{service.port}}
+      service: {{build.name}}:{{service.port|default('8080')}}
       {%- if "weight" in build.profile %}
       weight: {{build.profile.weight}}
       {%- endif %}

@@ -1,4 +1,6 @@
 name: frontend
+port: 8080
+targetPort: 80
 
 profiles:
   stable:

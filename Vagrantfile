@@ -19,6 +19,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :shell, path: 'config/vagrant/docker_registry_setup.sh'
   config.vm.provision :shell, path: 'config/vagrant/nfs_setup.sh'
   config.vm.provision :shell, path: 'config/vagrant/ambassador_setup.sh'
+  config.vm.provision :shell, path: 'config/vagrant/zipkin_setup.sh'
   config.vm.provision :shell, path: 'config/vagrant/kafka_setup.sh'
   config.vm.provision :shell, path: 'config/vagrant/influxdb_setup.sh'
   config.vm.provision :shell, path: 'config/vagrant/mariadb_setup.sh'
@@ -32,6 +33,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   
   config.vm.network :forwarded_port, host: 30080, guest: 30080
   config.vm.network :forwarded_port, host: 30088, guest: 30088
+  config.vm.network :forwarded_port, host: 30941, guest: 30941
   
   config.vm.provider "virtualbox" do |v|
     v.cpus = 4

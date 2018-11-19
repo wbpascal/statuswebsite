@@ -27,3 +27,8 @@ spec:
             cpu: {{build.profile.max_cpu}}
         ports:
         - containerPort: 80
+        env:
+        {% if not build.profile.debug|default(false) %}
+        - name: MIX_ENV
+          value: prod
+        {% endif %}

@@ -13,6 +13,7 @@ profiles:
   default:
     max_memory: 0.25G
     max_cpu: 0.25
+    debug: true
 
 branches:
   master: stable

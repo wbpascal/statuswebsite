@@ -48,9 +48,9 @@ fi
 
 #icinga2 API cert - regenerate new private key and certificate when running in a new container
 if [ ! -f "/var/lib/icinga2/certs/$(hostname).key" ]; then
-    echo "=== start of icinga2 node setup --master"
+	echo "=== start of icinga2 node setup --master"
 	icinga2 node setup --master
-    echo "=== end of icinga2 node setup --master"
+	echo "=== end of icinga2 node setup --master"
 fi
 
 chfn -f "${ICINGA2_USER_FULLNAME}" nagios

@@ -33,3 +33,7 @@ spec:
             secretKeyRef:
               name: jwt-secret
               key: jwtsecret
+        {% if not build.profile.debug|default(false) %}
+        - name: MIX_ENV
+          value: prod
+        {% endif %}

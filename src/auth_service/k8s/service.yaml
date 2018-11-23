@@ -8,7 +8,7 @@ metadata:
       apiVersion: ambassador/v0
       kind:  AuthService
       name:  authentication
-      auth_service: "{{build.name}}:{{service.targetPort or '8080'}}"
+      auth_service: "{{build.name}}:{{service.port|default('8080')}}"
       path_prefix: "/auth"
       allowed_headers:
       - "x-jwt-session"
@@ -19,4 +19,4 @@ spec:
   ports:
   - protocol: {{service.protocol|default('TCP')}}
     port: {{service.port|default('80')}}
-    targetPort: {{service.targetPort|default('8080')}}
+    targetPort: {{service.targetPort|default('80')}}

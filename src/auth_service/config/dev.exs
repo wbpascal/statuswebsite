@@ -8,7 +8,6 @@ use Mix.Config
 # with webpack to recompile .js and .css sources.
 config :auth_service, AuthServiceWeb.Endpoint,
   http: [port: 80],
-  url: [host: "auth-service", port: 80],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,

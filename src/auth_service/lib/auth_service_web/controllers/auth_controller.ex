@@ -1,9 +1,9 @@
-defmodule AuthServiceWeb.Controller.ExtauthController do
+defmodule AuthServiceWeb.Controller.AuthController do
   use AuthServiceWeb, :controller
+  require Logger
 
   def authenticate(conn, _) do
-    signer_secret = Application.fetch_env!(:auth_service, :jwt_secret)
-    signer = Joken.Signer.create("HS256", signer_secret)
+    signer = AuthService.Token.default_signer()
 
     with token_string <- get_token(conn),
          {:ok, claims} <- AuthService.Token.verify_and_validate(token_string, signer),
@@ -12,7 +12,9 @@ defmodule AuthServiceWeb.Controller.ExtauthController do
       |> put_resp_header("x-jwt-claims", claims_json)
       |> send_resp(200, "")
     else
-      _ -> conn |> send_resp(200, "")
+      error ->
+        Logger.debug "JWT Token validation failed"
+        conn |> send_resp(200, "")
     end
   end
 

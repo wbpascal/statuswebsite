@@ -3,6 +3,9 @@ protocol: TCP
 port: 80
 targetPort: 80
 
+istio:
+  enabled: true
+
 profiles:
   stable:
     max_memory: 1G

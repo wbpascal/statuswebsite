@@ -1,9 +1,0 @@
-#!/bin/bash
-
-. /opt/helpers
-
-if [ -f /opt/custom_run ]; then
-	chmod u+x /opt/custom_run
-	echo "=>executing /opt/custom_run"
-	/opt/custom_run
-fi

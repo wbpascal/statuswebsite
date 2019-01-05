@@ -6,4 +6,6 @@ Alle Informationen, wie mithilfe der Vagrant-VM entwickelt werden kann sind in d
 # API Spezifikationen
 Folgende API Spezifikationen sind über Swagger Hub zu erreichen:
 
-* [Measurements API](https://app.swaggerhub.com/apis-docs/vs-status/Measurements/1.0.0)
+* [Authentication API](https://app.swaggerhub.com/apis-docs/wpascal/Authentication/1.0.0)
+* [Measurements API](https://app.swaggerhub.com/apis-docs/wpascal/Measurements/1.0.0)
+* [Token API](https://app.swaggerhub.com/apis-docs/wpascal/Token/1.0.0)

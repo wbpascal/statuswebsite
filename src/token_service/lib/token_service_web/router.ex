@@ -11,6 +11,7 @@ defmodule TokenServiceWeb.Router do
 
   scope "/", TokenServiceWeb do
     pipe_through :api
-    post "/create", Controller.TokenController, :create
+    post "/encode", Controller.TokenController, :encode
+    post "/decode", Controller.TokenController, :decode
   end
 end

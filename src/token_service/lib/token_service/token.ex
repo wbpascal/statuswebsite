@@ -1,5 +1,6 @@
 defmodule TokenService.Token do
   use Joken.Config
+  require Logger
 
   @impl true
   def token_config do
@@ -13,14 +14,22 @@ defmodule TokenService.Token do
     {exp, token_info} = Map.pop(token_info, "expiration")
     {nbf, token_info} = Map.pop(token_info, "notbefore")
 
+    Logger.debug("token_info 1: #{inspect token_info}")
+
     token_info =
       if exp != nil and is_valid_unix_timestamp(exp) do
         Map.put(token_info, "exp", exp)
+      else
+        token_info
       end
     token_info =
       if nbf != nil and is_valid_unix_timestamp(nbf) do
         Map.put(token_info, "nbf", nbf)
+      else
+        token_info
       end
+    
+    Logger.debug("token_info 2: #{inspect token_info}")
 
     token_info =
       token_info

@@ -17,6 +17,8 @@ defmodule TokenServiceWeb.Controller.AuthController do
   end
 
   def get_token(conn) do
+    IO.inspect("Testing")
+  
     conn = fetch_cookies(conn)
     %{req_headers: headers, req_cookies: cookies} = conn
 

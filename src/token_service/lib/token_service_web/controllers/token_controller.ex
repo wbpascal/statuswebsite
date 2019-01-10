@@ -5,8 +5,8 @@ defmodule TokenServiceWeb.Controller.TokenController do
     case TokenService.Token.encode(claims) do
       {:ok, encoded_token} ->
         conn |> json(%{token: encoded_token})
-      _ ->
-        conn |> send_resp(400, "")
+      err ->
+        conn |> send_resp(400, "#{inspect err}")
     end
   end
 

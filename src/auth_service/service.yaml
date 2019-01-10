@@ -1,0 +1,19 @@
+name: auth-service
+protocol: TCP
+port: 80
+targetPort: 80
+
+istio: true
+
+profiles:
+  stable:
+    max_memory: 1G
+    max_cpu: 1
+  default:
+    debug: true
+    max_memory: 0.25G
+    max_cpu: 0.25
+
+branches:
+  master: stable
+  dev/*: default

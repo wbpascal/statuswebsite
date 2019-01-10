@@ -7,7 +7,7 @@ Vagrant.configure('2') do |config|
   # please see the online documentation at vagrantup.com.
 
   config.vm.box = "wpascal/vs-project"
-  config.vm.box_version = "1.0.2"
+  config.vm.box_version = "1.0.3"
   
   config.vm.network :private_network, ip: "10.10.0.2", auto_config: false
   

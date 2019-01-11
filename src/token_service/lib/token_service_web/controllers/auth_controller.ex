@@ -1,4 +1,4 @@
-defmodule TokenServiceWeb.Controller.AuthController do
+defmodule TokenServiceWeb.AuthController do
   use TokenServiceWeb, :controller
   require Logger
 

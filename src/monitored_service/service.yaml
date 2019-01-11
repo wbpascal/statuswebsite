@@ -1,4 +1,4 @@
-name: influxdb-listener
+name: monitored-service
 
 istio: true
 

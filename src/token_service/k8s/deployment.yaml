@@ -27,6 +27,18 @@ spec:
             cpu: {{build.profile.max_cpu}}
         ports:
         - containerPort: 80
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 80
+          initialDelaySeconds: 40
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 3
         env:
         - name: JWT_SECRET
           valueFrom:

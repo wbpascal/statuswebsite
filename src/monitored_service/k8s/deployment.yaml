@@ -20,27 +20,20 @@ spec:
         name: {{build.name}}
         resources:
           requests:
-            memory: {{build.profile.min_memory|default(0.1)}}
-            cpu: {{build.profile.min_cpu|default(0.1)}}
+            memory: {{build.profile.min_memory|default(0.05)}}
+            cpu: {{build.profile.min_cpu|default(0.05)}}
           limits:
             memory: {{build.profile.max_memory}}
             cpu: {{build.profile.max_cpu}}
-        ports:
-        - containerPort: 80
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: 80
-          initialDelaySeconds: 40
-          periodSeconds: 5
-        readinessProbe:
-          httpGet:
-            path: /healthz
-            port: 80
-          initialDelaySeconds: 5
-          periodSeconds: 3
         env:
-        {% if not build.profile.debug|default(false) %}
-        - name: MIX_ENV
+        - name: MYSQL_PASS
+          valueFrom:
+            secretKeyRef:
+              name: mariadb-mariadb
+              key: mariadb-root-password
+        - name: JAVA_ENV
+        {% if build.profile.debug|default(false) %}
+          value: debug
+        {% else %}
           value: prod
         {% endif %}

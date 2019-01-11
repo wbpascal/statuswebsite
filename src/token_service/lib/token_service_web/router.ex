@@ -4,14 +4,18 @@ defmodule TokenServiceWeb.Router do
   pipeline :api do
     plug :accepts, ["json"]
   end
+  
+  scope "/healthz", TokenServiceWeb do
+    get "/", HealthController, :alive
+  end
 
   scope "/auth", TokenServiceWeb do
-    match(:*, "/*path", Controller.AuthController, :authenticate)
+    match(:*, "/*path", AuthController, :authenticate)
   end
 
   scope "/", TokenServiceWeb do
     pipe_through :api
-    post "/encode", Controller.TokenController, :encode
-    post "/decode", Controller.TokenController, :decode
+    post "/encode", TokenController, :encode
+    post "/decode", TokenController, :decode
   end
 end

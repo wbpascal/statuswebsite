@@ -1,4 +1,4 @@
-defmodule TokenServiceWeb.Controller.TokenController do
+defmodule TokenServiceWeb.TokenController do
   use TokenServiceWeb, :controller
 
   def encode(conn, claims) do

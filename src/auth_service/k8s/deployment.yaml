@@ -31,13 +31,13 @@ spec:
           httpGet:
             path: /healthz
             port: 80
-          initialDelaySeconds: 15
+          initialDelaySeconds: 40
           periodSeconds: 5
         readinessProbe:
           httpGet:
             path: /healthz
             port: 80
-          initialDelaySeconds: 10
+          initialDelaySeconds: 5
           periodSeconds: 3
         env:
         - name: MYSQL_PASS

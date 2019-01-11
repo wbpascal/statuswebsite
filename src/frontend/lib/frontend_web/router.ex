@@ -12,11 +12,9 @@ defmodule FrontendWeb.Router do
   pipeline :api do
     plug :accepts, ["json"]
   end
-
-  scope "/", FrontendWeb do
-    pipe_through :browser
-
-    get "/", PageController, :index
+  
+  scope "/healthz", FrontendWeb do
+    get "/", HealthController, :alive
   end
 
   scope "/api", FrontendWeb do
@@ -25,8 +23,10 @@ defmodule FrontendWeb.Router do
     get "/token/create", PageController, :create_token
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", FrontendWeb do
-  #   pipe_through :api
-  # end
+  scope "/", FrontendWeb do
+    pipe_through :browser
+
+    get "/", PageController, :index
+  end
+  
 end

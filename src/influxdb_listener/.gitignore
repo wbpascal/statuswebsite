@@ -1,6 +1,6 @@
 
-# Created by https://www.gitignore.io/api/java,gradle,eclipse,intellij,jetbrains
-# Edit at https://www.gitignore.io/?templates=java,gradle,eclipse,intellij,jetbrains
+# Created by https://www.gitignore.io/api/java,gradle,eclipse,intellij,jetbrains,netbeans,visualstudiocode
+# Edit at https://www.gitignore.io/?templates=java,gradle,eclipse,intellij,jetbrains,netbeans,visualstudiocode
 
 ### Eclipse ###
 
@@ -226,6 +226,27 @@ hs_err_pid*
 
 # Sonarlint plugin
 
+### NetBeans ###
+**/nbproject/private/
+**/nbproject/Makefile-*.mk
+**/nbproject/Package-*.bash
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+
 ### Gradle ###
 .gradle
 /build/
@@ -245,4 +266,4 @@ gradle-app.setting
 ### Gradle Patch ###
 **/build/
 
-# End of https://www.gitignore.io/api/java,gradle,eclipse,intellij,jetbrains
+# End of https://www.gitignore.io/api/java,gradle,eclipse,intellij,jetbrains,netbeans,visualstudiocode

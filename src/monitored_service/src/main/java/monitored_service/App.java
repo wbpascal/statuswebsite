@@ -10,4 +10,11 @@ public class App {
             Thread.sleep(10000);
         }
     }
+
+    public void addHost() {
+    }
+
+    public void deleteHost() {
+    }
+    
 }

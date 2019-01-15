@@ -1,14 +1,11 @@
 FROM bitwalker/alpine-elixir-phoenix:latest
 
-WORKDIR /app
-
 # Install newest phoenix version
 RUN mix archive.uninstall phx_new --force
 RUN mix archive.install hex phx_new 1.4.0 --force
 
 # Copy basic mix project to container
 COPY mix.exs mix.exs
-COPY mix.lock mix.lock
 
 # Download and compile dependencies
 RUN mix do deps.get, deps.compile

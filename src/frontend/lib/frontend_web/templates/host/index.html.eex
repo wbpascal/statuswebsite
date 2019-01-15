@@ -1,0 +1,1 @@
+<h1><%= gettext "Hello from host %{id}!", id: @id %></h1>

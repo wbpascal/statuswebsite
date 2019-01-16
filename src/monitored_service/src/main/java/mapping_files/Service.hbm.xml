@@ -10,6 +10,7 @@
         </id>
 
         <property name="serviceName" column="service_name" type="String"/>
+        <property name="hostID" column="host_id" type="int"/>
         <property name="type" column="type" type="String"/>
     </class>
 </hibernate-mapping>

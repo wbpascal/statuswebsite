@@ -11,7 +11,7 @@
 
         <set name="services" table="SERVICES">
             <key>
-                <column name="id"/>
+                <column name="host_id" not-null="true"/>
             </key>
             <one-to-many class="Entities.Service"/>
         </set>

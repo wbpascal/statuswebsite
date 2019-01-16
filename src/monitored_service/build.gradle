@@ -26,6 +26,8 @@ dependencies {
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
+
+    implementation 'org.hibernate:hibernate-core:5.4.0.Final'
 }
 
 // Define the main class for the application

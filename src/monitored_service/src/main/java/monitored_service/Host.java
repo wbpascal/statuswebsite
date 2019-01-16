@@ -4,17 +4,21 @@ import java.util.ArrayList;
 
 public class Host {
     private String hostName;
-    private ArrayList<Service> services=new ArrayList<Service>();
-    private String address;
+    private ArrayList<Service> services=new ArrayList<>();
+    private int id;
+    private String description;
+    private String icon; //change String to any picture file format
 
-    public Host(String name, String url) {
-        this.hostName = name;
-        this.address = url;
+    public Host(String hostName, int id, String description, String icon) {
+        this.hostName = hostName;
+        this.id = id;
+        this.description = description;
+        this.icon = icon;
     }
 
-    public Host(String name, String url, ArrayList<Service> servicelist) {
-        this.hostName = name;
-        this.address = url;
+    public Host(String hostName, int id, ArrayList<Service> servicelist) {
+        this.hostName = hostName;
+        this.id = id;
         this.services = servicelist;
     }
 
@@ -32,8 +36,12 @@ public class Host {
         return hostName;
     }
 
-    public String getAddress() {
-        return address;
+    public int geId() {
+        return id;
+    }
+
+    public String getIcon() {
+        return icon;
     }
 
 }

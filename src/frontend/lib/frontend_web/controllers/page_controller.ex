@@ -1,5 +1,6 @@
 defmodule FrontendWeb.PageController do
   use FrontendWeb, :controller
+  require Logger
 
   def index(%{req_headers: headers} = conn, _params) do
     render(conn, "index.html")

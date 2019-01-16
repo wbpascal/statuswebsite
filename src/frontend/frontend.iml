@@ -6,12 +6,6 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/lib" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
-      <excludeFolder url="file://$MODULE_DIR$/assets/node_modules/phoenix" />
-      <excludeFolder url="file://$MODULE_DIR$/assets/node_modules/phoenix_html" />
-      <excludeFolder url="file://$MODULE_DIR$/cover" />
-      <excludeFolder url="file://$MODULE_DIR$/deps" />
-      <excludeFolder url="file://$MODULE_DIR$/doc" />
-      <excludeFolder url="file://$MODULE_DIR$/logs" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -23,6 +17,7 @@
     <orderEntry type="library" name="jason" level="project" />
     <orderEntry type="library" name="plug_cowboy" level="project" />
     <orderEntry type="library" name="poison" level="project" />
+    <orderEntry type="library" name="httpoison" level="project" />
     <orderEntry type="library" name="plug" level="project" />
     <orderEntry type="library" name="ex_doc" level="project" />
     <orderEntry type="library" name="inch_ex" level="project" />
@@ -38,8 +33,10 @@
     <orderEntry type="library" name="exjsx" level="project" />
     <orderEntry type="library" name="json" level="project" />
     <orderEntry type="library" name="jazz" level="project" />
+    <orderEntry type="library" name="mimic" level="project" />
+    <orderEntry type="library" name="httparrot" level="project" />
+    <orderEntry type="library" name="dialyxir" level="project" />
     <orderEntry type="library" name="mime" level="project" />
     <orderEntry type="library" name="plug_crypto" level="project" />
-    <orderEntry type="library" name="httpoison" level="project" />
   </component>
 </module>

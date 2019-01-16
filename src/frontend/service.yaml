@@ -2,8 +2,7 @@ name: frontend
 port: 80
 targetPort: 80
 
-istio:
-  enabled: true
+istio: true
 
 profiles:
   stable:

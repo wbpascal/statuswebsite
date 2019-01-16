@@ -1,15 +1,16 @@
 package Entities;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 public class Host {
     private String hostName;
-    private ArrayList<Service> services;
+    private Set<Service> services;
     private String description;
     private String icon;
     private int id;
 
-    public Host(int id, String hostName, ArrayList<Service> serviceList, String description, String icon) {
+    public Host(int id, String hostName, Set<Service> serviceList, String description, String icon) {
         this.id = id;
         this.hostName = hostName;
         this.services = serviceList;
@@ -23,6 +24,10 @@ public class Host {
 
     public String getHostName() {
         return hostName;
+    }
+
+    public Set<Service> getServices() {
+        return services;
     }
 
     public String getDescription() {

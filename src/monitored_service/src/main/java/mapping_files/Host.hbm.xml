@@ -9,17 +9,15 @@
             <generator class="native"/>
         </id>
 
+        <set name="services" table="SERVICES">
+            <key>
+                <column name="id"/>
+            </key>
+            <one-to-many class="Entities.Service"/>
+        </set>
+
         <property name="hostName" column="host_name" type="String"/>
         <property name="description" column="description" type="String"/>
         <property name="icon" column="icon" type="String"/>
-    </class>
-    
-    <class name="Entities.Service" table="SERVICES">
-        <id name="id" type="int" column="id">
-            <generator class="native"/>
-        </id>
-
-        <property name="serviceName" column="service_name" type="String"/>
-        <property name="type" column="type" type="String"/>
     </class>
 </hibernate-mapping>

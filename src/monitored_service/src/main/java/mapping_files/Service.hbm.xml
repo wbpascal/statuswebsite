@@ -1,0 +1,16 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="Entities.Service" table="SERVICES">
+        <id name="id" type="int" column="id">
+            <generator class="native"/>
+        </id>
+
+        <property name="serviceName" column="service_name" type="String"/>
+        <property name="hostID" column="host_id" type="int"/>
+        <property name="type" column="type" type="String"/>
+    </class>
+</hibernate-mapping>

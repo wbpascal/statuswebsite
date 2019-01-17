@@ -43,7 +43,7 @@ spec:
         - name: MYSQL_PASS
           valueFrom:
             secretKeyRef:
-              name: mariadb-mariadb
+              name: mariadb
               key: mariadb-root-password
         {% if not build.profile.debug|default(false) %}
         - name: MIX_ENV

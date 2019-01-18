@@ -23,8 +23,8 @@ repositories {
 dependencies {
     implementation 'com.google.guava:guava:26.0-jre'
 
+    implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'io.reactivex.rxjava2:rxjava:2.2.5'
-    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.rabbitmq:amqp-client:5.4.1'
 
     testImplementation 'junit:junit:4.12'
@@ -37,9 +37,11 @@ jar {
     manifest {
         attributes "Main-Class": mainClassName
     }
- 
+
     from {
-        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+        configurations.runtimeClasspath.collect {
+            if (it.directory) it else zipTree(it)
+        }
     }
 }
 

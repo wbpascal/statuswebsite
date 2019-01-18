@@ -26,6 +26,13 @@ spec:
             memory: {{build.profile.max_memory}}
             cpu: {{build.profile.max_cpu}}
         env:
+        - name: ICINGA_API_USER
+          value: root
+        - name: ICINGA_API_PASS
+          valueFrom:
+            secretKeyRef:
+              name: icinga-api
+              key: password
         - name: JAVA_ENV
         {% if build.profile.debug|default(false) %}
           value: debug

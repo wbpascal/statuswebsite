@@ -3,11 +3,26 @@
  */
 package influxdb.listener;
 
+import influxdb.listener.models.CheckEvent;
+import influxdb.listener.utility.HttpClient;
+import influxdb.listener.utility.IcingaService;
+import io.reactivex.Observable;
+
 public class App {
     public static void main(String[] args) throws InterruptedException {
-        while (true) {
-            System.out.println("Hello");
-            Thread.sleep(10000);
+        HttpClient.trustAllCertificates();
+
+        Observable<CheckEvent> events = IcingaService.getEventStream(new String[]{"CheckResult"}, "listener");
+        if (events == null) return;
+
+        events.subscribe(App::onCheckEventRecieved);
+
+        while(true) {
+            Thread.sleep(500000); //blocking operations don't work for the observable so we just have to sleep this thread forever
         }
+    }
+
+    private static void onCheckEventRecieved(CheckEvent event) {
+        System.out.println("Host: " + event.getHost() + ", Service: " + event.getService());
     }
 }

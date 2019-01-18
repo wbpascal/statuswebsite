@@ -25,10 +25,10 @@ Dank dem eingebauten DNS Server von Kubernetes können alle im Cluster der VM la
 * Passwort: Im Secret `influxdb-influxdb-auth` zu finden
 
 ### MariaDB
-* Hostname: `mariadb-mariadb`
+* Hostname: `mariadb`
 * Port: `3306`
 * Benutzername: `maria`
-* Passwort: Im Secret `mariadb-mariadb` zu finden
+* Passwort: Im Secret `mariadb` zu finden
 
 ### RabbitMQ
 * Hostname: `rabbitmq`

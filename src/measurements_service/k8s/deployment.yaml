@@ -20,32 +20,25 @@ spec:
         name: {{build.name}}
         resources:
           requests:
-            memory: {{build.profile.min_memory|default(0.1)}}
-            cpu: {{build.profile.min_cpu|default(0.1)}}
+            memory: {{build.profile.min_memory|default(0.05)}}
+            cpu: {{build.profile.min_cpu|default(0.05)}}
           limits:
             memory: {{build.profile.max_memory}}
             cpu: {{build.profile.max_cpu}}
-        ports:
-        - containerPort: 80
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: 80
-          initialDelaySeconds: 40
-          periodSeconds: 5
-        readinessProbe:
-          httpGet:
-            path: /healthz
-            port: 80
-          initialDelaySeconds: 5
-          periodSeconds: 3
         env:
-        - name: MYSQL_PASS
+        - name: INFLUX_PASS
           valueFrom:
             secretKeyRef:
-              name: mariadb
-              key: mariadb-root-password
-        {% if not build.profile.debug|default(false) %}
-        - name: MIX_ENV
+              name: influxdb-influxdb-auth
+              key: influxdb-password
+        - name: INFLUX_USER
+          valueFrom:
+            secretKeyRef:
+              name: influxdb-influxdb-auth
+              key: influxdb-user
+        - name: FLASK_ENV
+        {% if build.profile.debug|default(false) %}
+          value: debug
+        {% else %}
           value: prod
         {% endif %}

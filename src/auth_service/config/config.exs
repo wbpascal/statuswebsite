@@ -33,7 +33,7 @@ config :auth_service, AuthService.Repo,
   username: "root",
   password: System.get_env("MYSQL_PASS"),
   database: "auth_service",
-  hostname: "mariadb-mariadb",
+  hostname: "mariadb",
   port: 3306
 
 # Import environment specific config. This must remain at the bottom

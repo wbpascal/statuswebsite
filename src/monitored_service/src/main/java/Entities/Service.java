@@ -6,6 +6,9 @@ public class Service {
     private String serviceName;
     private String type;
 
+    public Service() {
+    }
+
     public Service(int id, String name, int hostID, String type) {
         this.id = id;
         this.serviceName = name;
@@ -17,15 +20,31 @@ public class Service {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getServiceName() {
         return serviceName;
+    }
+
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
     }
 
     public int getHostID() {
         return hostID;
     }
 
+    public void setHostID(int id) {
+        this.hostID = id;
+    }
+
     public String getType() {
         return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

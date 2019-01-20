@@ -78,8 +78,8 @@ public class CheckResultMessage {
 
         instance.setTimestamp(event.getCheckResult().getExecutionEnd());
 
-        float timeTaken;
         try {
+            float timeTaken;
             // At the moment only HTTP and PING checks are supported, all other events get ignored
             if (event.getCheckResult().getOutput().startsWith("HTTP")) {
                 String performanceData = (String) event.getCheckResult().getPerformanceData()[0];
@@ -90,14 +90,16 @@ public class CheckResultMessage {
                 String timeData = performanceData.split("ms;")[0].substring("rta=".length());
                 timeTaken = Float.parseFloat(timeData);
             } else {
-                return null;
+                // If the event was not a successful check we have to return the instance directly because
+                // the output is also different and always can't be parsed
+                return instance.isSuccess() ? null : instance;
             }
+            instance.setTimeTaken(timeTaken);
         } catch (Exception ex) {
             System.out.println("Could not get time taken from performance data. Stack trace follows.");
             ex.printStackTrace();
             return null;
         }
-        instance.setTimeTaken(timeTaken);
 
         return instance;
     }

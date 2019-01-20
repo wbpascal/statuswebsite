@@ -1,7 +1,7 @@
 package influxdb.listener.utility;
 
 import com.google.gson.Gson;
-import influxdb.listener.models.CheckEvent;
+import influxdb.listener.models.icinga.CheckEvent;
 import io.reactivex.Observable;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -18,6 +18,28 @@ public class IcingaService {
     private static final String ICINGA_BASE_URL = "https://icinga-api:5665";
 
     public static Observable<CheckEvent> getEventStream(String[] types, String queue) {
+        Gson gson = new Gson();
+        return Observable.<String>create(emitter -> {
+            while (true) {
+                try {
+                    InputStream inputStream = getEventStreamInputStream(types, queue);
+                    if (inputStream == null) continue;
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+
+                    while (true) {
+                        String line = bufferedReader.readLine();
+                        // System.out.println(line);
+                        emitter.onNext(line);
+                    }
+                } catch (Exception ignored) {
+                    System.out.println("Exception reading the InputStream. Restarting request...");
+                    // Ignore the exception and restart the request
+                }
+            }
+        }).map(s -> gson.fromJson(s, CheckEvent.class));
+    }
+
+    private static InputStream getEventStreamInputStream(String[] types, String queue) {
         ArrayList<Pair<String, String>> postParams = new ArrayList<>();
         postParams.add(new Pair<>("queue", queue));
         for (String type : types) {
@@ -29,26 +51,13 @@ public class IcingaService {
         if (httpURLConnection == null)
             return null;
 
-        InputStream inputStream;
         try {
-            inputStream = httpURLConnection.getInputStream();
+            return httpURLConnection.getInputStream();
         } catch (IOException e) {
             System.out.println("Could not get input stream");
             System.out.println(e.toString());
             return null;
         }
-
-        InputStream finalInputStream = inputStream;
-        Gson gson = new Gson();
-        return Observable.<String>create(emitter -> {
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(finalInputStream));
-
-            while (true) {
-                String line = bufferedReader.readLine();
-                System.out.println(line);
-                emitter.onNext(line);
-            }
-        }).map(s -> gson.fromJson(s, CheckEvent.class));
     }
 
     private static Collection<Pair<String, String>> createDefaultIcingaHeader() {
@@ -56,7 +65,7 @@ public class IcingaService {
         headers.add(new Pair<>("Accept", "application/json"));
         String user = System.getenv("ICINGA_API_USER");
         String password = System.getenv("ICINGA_API_PASS");
-        String encoded = Base64.getEncoder().encodeToString((user + ":"+password).getBytes(StandardCharsets.UTF_8));
+        String encoded = Base64.getEncoder().encodeToString((user + ":" + password).getBytes(StandardCharsets.UTF_8));
         headers.add(new Pair<>("Authorization", "Basic " + encoded));
         return headers;
     }

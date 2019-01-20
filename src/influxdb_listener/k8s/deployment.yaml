@@ -33,6 +33,13 @@ spec:
             secretKeyRef:
               name: icinga-api
               key: password
+        - name: RABBITMQ_USER
+          value: rabbit
+        - name: RABBITMQ_PASS
+          valueFrom:
+            secretKeyRef:
+              name: rabbitmq
+              key: rabbitmq-password
         - name: JAVA_ENV
         {% if build.profile.debug|default(false) %}
           value: debug

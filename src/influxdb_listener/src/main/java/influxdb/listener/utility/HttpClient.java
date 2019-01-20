@@ -16,8 +16,8 @@ import java.util.Collection;
 public class HttpClient {
 
     public static HttpsURLConnection startPostRequestSsl(String baseUrl, Collection<Pair<String, String>> queryParams,
-                                                      Collection<Pair<String, String>> postArgs,
-                                                      Collection<Pair<String, String>> headers) {
+                                                         Collection<Pair<String, String>> postArgs,
+                                                         Collection<Pair<String, String>> headers) {
         if (queryParams != null && queryParams.size() != 0)
             baseUrl += "?" + paramsToString(queryParams);
 
@@ -60,7 +60,7 @@ public class HttpClient {
         }
 
         // Write POST data to output stream
-        try(DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {
+        try (DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {
             wr.write(postData);
         } catch (IOException e) {
             System.out.println("Error while writing to output stream");
@@ -72,19 +72,22 @@ public class HttpClient {
 
     public static void trustAllCertificates() {
         // Create a trust manager that does not validate certificate chains
-        TrustManager[] trustAllCerts = new TrustManager[] {new X509TrustManager() {
-            public java.security.cert.X509Certificate[] getAcceptedIssuers() {
-                return null;
-            }
-            public void checkClientTrusted(X509Certificate[] certs, String authType) {
-            }
-            public void checkServerTrusted(X509Certificate[] certs, String authType) {
-            }
-        }
+        TrustManager[] trustAllCerts = new TrustManager[]{
+                new X509TrustManager() {
+                    public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+                        return null;
+                    }
+
+                    public void checkClientTrusted(X509Certificate[] certs, String authType) {
+                    }
+
+                    public void checkServerTrusted(X509Certificate[] certs, String authType) {
+                    }
+                }
         };
 
         // Install the all-trusting trust manager
-        SSLContext sc = null;
+        SSLContext sc;
         try {
             sc = SSLContext.getInstance("SSL");
             sc.init(null, trustAllCerts, new java.security.SecureRandom());

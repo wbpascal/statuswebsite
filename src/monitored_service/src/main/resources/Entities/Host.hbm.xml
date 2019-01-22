@@ -10,9 +10,7 @@
         </id>
 
         <set name="services" table="SERVICES">
-            <key>
-                <column name="host_id" not-null="true"/>
-            </key>
+            <key column="host_id" not-null="true"/>
             <one-to-many class="Entities.Service"/>
         </set>
 

@@ -12,7 +12,7 @@ defmodule FrontendWeb.Router do
   pipeline :api do
     plug :accepts, ["json"]
   end
-  
+
   scope "/healthz", FrontendWeb do
     get "/", HealthController, :alive
   end
@@ -29,5 +29,4 @@ defmodule FrontendWeb.Router do
     get "/", PageController, :index
     get "/:id", HostController, :index
   end
-  
 end

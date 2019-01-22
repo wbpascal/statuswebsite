@@ -1,1 +1,38 @@
-<h1><%= gettext "Hello from host %{id}!", id: @id %></h1>
+<div class="d-flex justify-content-between host-status-header">
+  <img src="<%= @host["icon"] %>" class="img-fluid" alt="Responsive image"/>
+  <h1 class="align-self-center">
+    <%= gettext "%{name} (%{id})", id: @host["id"], name: @host["name"] %>
+  </h1>
+</div>
+
+<div class="container">
+  <div class="row" style="margin-bottom: 70px;">
+    <div class="col alert alert-success" role="alert">
+      <p class="host-alert-font font-big">All systems are operational. You should be able to reach the site.</p>
+    </div>
+  </div>
+
+  <% services = get_services(@host["id"]) %>
+
+  <div class="row">
+    <h2>Major Services</h2>
+  </div>
+  <div class="row" style="margin-bottom: 70px;">
+    <ul class="list-group col">
+      <%= for service <- services |> get_mayor_services() do %>
+        <li class="list-group-item">Major Service</li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="row">
+    <h2>Minor Services</h2>
+  </div>
+  <div class="row">
+    <ul class="list-group col">
+      <%= for service <- services |> get_minor_services() do %>
+        <li class="list-group-item">Minor Service</li>
+      <% end %>
+    </ul>
+  </div>
+</div>

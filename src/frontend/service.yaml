@@ -1,6 +1,6 @@
 name: frontend
 port: 80
-targetPort: 80
+targetPort: 4000
 
 istio: true
 

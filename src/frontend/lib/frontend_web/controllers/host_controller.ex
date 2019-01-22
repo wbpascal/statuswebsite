@@ -3,7 +3,7 @@ defmodule FrontendWeb.HostController do
   require Logger
 
   def index(conn, %{"id" => id}) do
-    render(conn, "index.html", id: id)
+    host_info = Frontend.MonitoredService.get_host_info(id)
+    render(conn, "index.html", host: host_info)
   end
-
 end

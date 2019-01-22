@@ -7,7 +7,8 @@ defmodule FrontendWeb.PageController do
   end
 
   def create_token(conn, %{"uid" => uid}) do
-    %HTTPoison.Response{body: body} = HTTPoison.post!("http://auth-service/token/create", {:form, [uid: uid]})
+    %HTTPoison.Response{body: body} =
+      HTTPoison.post!("http://auth-service/token/create", {:form, [uid: uid]})
 
     conn
     |> send_resp(200, body)

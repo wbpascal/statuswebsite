@@ -12,6 +12,7 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE")
+        classpath 'com.h2database:h2:1.4.191'
     }
 }
 
@@ -21,6 +22,8 @@ plugins {
 
     // Apply the application plugin to add support for building an application
     id 'application'
+
+    id "org.flywaydb.flyway" version "5.2.4"
 }
 
 apply plugin: 'org.springframework.boot'
@@ -46,6 +49,8 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-data-jpa:1.1.4.RELEASE'
     compile 'org.springframework.boot:spring-boot-starter-web'
     implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.13'
+
+    compile "org.flywaydb:flyway-core:5.2.4"
 }
 
 // Define the main class for the application

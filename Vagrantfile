@@ -13,7 +13,7 @@ Vagrant.configure('2') do |config|
   
   config.vm.provider "virtualbox" do |v|
     v.cpus = 4
-    v.memory = 6096
+    v.memory = 4096
 	# Use max 50% of cpu
 	v.customize ["modifyvm", :id, "--cpuexecutioncap", "50"]
 	# Needed to enable symlinks in VirtualBox shared folders

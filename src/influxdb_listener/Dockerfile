@@ -10,6 +10,6 @@ COPY gradlew gradlew
 COPY settings.gradle settings.gradle
 
 # Build and test project
-RUN ./gradlew build
+RUN ./gradlew jar
 
 CMD ["java", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-jar", "build/libs/influxdb_listener.jar"]

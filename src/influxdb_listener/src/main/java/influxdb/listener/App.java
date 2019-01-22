@@ -3,11 +3,37 @@
  */
 package influxdb.listener;
 
+import influxdb.listener.models.icinga.CheckEvent;
+import influxdb.listener.models.rabbitmq.CheckResultMessage;
+import influxdb.listener.utility.HttpClient;
+import influxdb.listener.utility.IcingaService;
+import influxdb.listener.utility.IntegerUtility;
+import influxdb.listener.utility.RabbitMqService;
+import io.reactivex.Observable;
+
 public class App {
     public static void main(String[] args) throws InterruptedException {
-        while (true) {
-            System.out.println("Hello");
-            Thread.sleep(10000);
+        HttpClient.trustAllCertificates();
+
+        Observable<CheckEvent> events = IcingaService.getEventStream(new String[]{"CheckResult"}, "listener");
+        if (events == null) return;
+
+        events.filter(checkEvent -> IntegerUtility.isInteger(checkEvent.getService()))
+                .doOnError(Throwable::printStackTrace)
+                .subscribe(App::onCheckEventReceived);
+
+        // blocking operations don't work for the observable somehow so we just have to block this thread forever
+        Thread.currentThread().join();
+    }
+
+    private static void onCheckEventReceived(CheckEvent event) {
+        CheckResultMessage checkResultMessage = CheckResultMessage.fromCheckEvent(event);
+        if(checkResultMessage == null) {
+            System.out.println("Could not publish check event to message queue. \n CheckEvent was: " + event.toString());
+            return;
         }
+
+        System.out.println("Publishing following event to message queue: " + checkResultMessage.toString());
+        RabbitMqService.publishIcingaCheckEvent(checkResultMessage);
     }
 }

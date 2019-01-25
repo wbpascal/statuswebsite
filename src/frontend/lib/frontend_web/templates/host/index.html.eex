@@ -1,18 +1,17 @@
+<% services = get_services(@host["id"]) %>
+<% measurements = get_measurements(services) %>
+
 <div class="d-flex justify-content-between host-status-header">
   <img src="<%= @host["icon"] %>" class="img-fluid" alt="Responsive image"/>
   <h1 class="align-self-center">
-    <%= gettext "%{name} (%{id})", id: @host["id"], name: @host["name"] %>
+    <%= gettext "%{name}", name: @host["name"] %>
   </h1>
 </div>
 
 <div class="container">
   <div class="row" style="margin-bottom: 70px;">
-    <div class="col alert alert-success" role="alert">
-      <p class="host-alert-font font-big">All systems are operational. You should be able to reach the site.</p>
-    </div>
+    <%= get_overall_status(services, measurements) |> raw() %>
   </div>
-
-  <% services = get_services(@host["id"]) %>
 
   <div class="row">
     <h2>Major Services</h2>
@@ -20,7 +19,10 @@
   <div class="row" style="margin-bottom: 70px;">
     <ul class="list-group col">
       <%= for service <- services |> get_mayor_services() do %>
-        <li class="list-group-item">Major Service</li>
+        <li class="list-group-item">
+          <%= render @view_module, "mayor_service.html",
+              assigns |> Map.put(:measurements, measurements) |> Map.put(:service, service) %>
+        </li>
       <% end %>
     </ul>
   </div>
@@ -31,8 +33,14 @@
   <div class="row">
     <ul class="list-group col">
       <%= for service <- services |> get_minor_services() do %>
-        <li class="list-group-item">Minor Service</li>
+        <li class="list-group-item">
+          <%= render @view_module, "minor_service.html",
+                     assigns |> Map.put(:measurements, measurements) |> Map.put(:service, service) %>
+        </li>
       <% end %>
     </ul>
   </div>
+
+  <div style="height: 100px"></div>
+
 </div>

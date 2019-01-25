@@ -1,0 +1,4 @@
+<h5>
+  <%= @service["name"] %>
+  <%= get_service_status_text(@measurements, @service["id"]) |> raw() %>
+</h5>

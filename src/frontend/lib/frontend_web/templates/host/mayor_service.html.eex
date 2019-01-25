@@ -1,0 +1,12 @@
+<h4>
+  <%= @service["name"] %>
+  <%= get_service_status_text(@measurements, @service["id"]) |> raw() %>
+</h4>
+<canvas id="<%= "service-chart-#{@service["id"]}" %>" height="90"></canvas>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const measurements = <%= get_measurements_json_data(@measurements, @service["id"]) |> raw() %>;
+    const canvas = document.getElementById('<%= "service-chart-#{@service["id"]}" %>');
+    buildChartFromMeasurements(canvas, measurements);
+  });
+</script>

@@ -21,6 +21,18 @@ defmodule Frontend.MonitoredService do
         "name" => "Test ping service",
         "host_id" => host_id,
         "type" => "mayor"
+      },
+      %{
+        "id" => 3,
+        "name" => "Test minor ping service",
+        "host_id" => host_id,
+        "type" => "minor"
+      },
+      %{
+        "id" => 4,
+        "name" => "Test minor http service",
+        "host_id" => host_id,
+        "type" => "minor"
       }
     ]
   end

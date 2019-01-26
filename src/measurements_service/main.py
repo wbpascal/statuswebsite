@@ -38,7 +38,7 @@ def measurements():
 	#optional Parameters
 	#serviceId    = request.args.get('serviceId')
 	# GROUP BY time({gb}),gb=groupBy
-	rstr = "select FIRST(*) from http,ping4 WHERE time >= {s} AND time <= {e} GROUP BY time({gb}) LIMIT 30;".format(s=startTime,e=endTime,gb=groupBy)
+	rstr = "select MEAN(execution_time),Count(time) from http,ping4 WHERE time >= {s} AND time <= {e} GROUP BY time({gb}) LIMIT 30;".format(s=startTime,e=endTime,gb=groupBy)
 	response  = client.query(rstr)
 	#result = ""
 	#for p in response.get_points():

@@ -10,7 +10,12 @@
 
 <div class="container">
   <div class="row" style="margin-bottom: 70px;">
-    <%= get_overall_status(services, measurements) |> raw() %>
+    <div id="overall-status-success" class="col alert alert-success d-none" role="alert">
+      <p class="host-alert-font font-big">All systems are operational. You should be able to reach the site.</p>
+    </div>
+    <div id="overall-status-warning" class="col alert alert-warning d-none" role="alert">
+      <p class="host-alert-font font-big">Some services may not be reachable.</p>
+    </div>
   </div>
 
   <div class="row">
@@ -44,3 +49,10 @@
   <div style="height: 100px"></div>
 
 </div>
+
+<script>
+  window.overallStatus = createOverallStatus();
+  document.addEventListener("DOMContentLoaded", function() {
+     window.overallStatus.updateStatus();
+  });
+</script>

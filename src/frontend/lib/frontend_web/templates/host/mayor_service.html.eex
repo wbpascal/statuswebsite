@@ -14,6 +14,7 @@
     let canvas = document.getElementById("<%= "service-chart-#{@service["id"]}" %>");
     let statusContainer = document.getElementById("<%= "service-status-#{@service["id"]}" %>");
     let service = createService(<%= @service["id"] %>, canvas, statusContainer, measurements);
+    window.overallStatus.addMayorService(service);
     service.startListeningForUpdates();
   });
 </script>

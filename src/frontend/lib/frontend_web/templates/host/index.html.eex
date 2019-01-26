@@ -1,7 +1,7 @@
 <% services = get_services(@host["id"]) %>
 <% measurements = get_measurements(services) %>
 
-<div class="d-flex justify-content-between host-status-header">
+<div class="container d-flex justify-content-between host-status-header">
   <img src="<%= @host["icon"] %>" class="img-fluid" alt="Responsive image"/>
   <h1 class="align-self-center">
     <%= gettext "%{name}", name: @host["name"] %>

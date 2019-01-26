@@ -1,35 +1,37 @@
-<section class="phx-hero">
-  <h1><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h1>
-  <p>A productive web framework that<br/>does not compromise speed and maintainability.</p>
-</section>
+<div class="jumbotron">
+  <h1 class="display-4">Hello, world!</h1>
+  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+  <hr class="my-4">
+  <div class="container">
+    <form class="form-inline mx-auto row">
+      <input class="form-control col col-8 col-md-6 mr-2 offset-md-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-info col col-3 col-md-2 " type="submit">Search</button>
+    </form>
+  </div>
+</div>
+<div class="container">
+  <div>
 
-<section class="row">
-  <article class="column">
-    <h2>Resources</h2>
-    <ul>
-      <li>
-        <a href="https://hexdocs.pm/phoenix/overview.html">Guides &amp; Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix/blob/v1.4/CHANGELOG.md">v1.4 Changelog</a>
-      </li>
-    </ul>
-  </article>
-  <article class="column">
-    <h2>Help</h2>
-    <ul>
-      <li>
-        <a href="https://elixirforum.com/c/phoenix-forum">Forum</a>
-      </li>
-      <li>
-        <a href="https://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on Freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">Twitter @elixirphoenix</a>
-      </li>
-    </ul>
-  </article>
-</section>
+  </div>
+  <table class="table table-striped col">
+    <thead style="background-color: #343a40 !important; color: #fff;">
+      <tr>
+        <th scope="col" style="width: 20%;">#</th>
+        <th scope="col" style="width: 67%;">Name</th>
+        <th scope="col" align="right" >Link</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Test Host</td>
+        <td><a class="btn btn-info" href="/1">Status</a></td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>Test Host 2</td>
+        <td><a class="btn btn-info" href="/2">Status</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

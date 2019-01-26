@@ -79,22 +79,20 @@ public class CheckResultMessage {
         instance.setTimestamp(event.getCheckResult().getExecutionEnd());
 
         try {
-            float timeTaken;
-            // At the moment only HTTP and PING checks are supported, all other events get ignored
-            if (event.getCheckResult().getOutput().startsWith("HTTP")) {
+            // At the moment only HTTP and PING checks are supported, all other checks are ignored
+            if (!instance.getSuccess()) { // Not a successful check, ignore output
+                instance.setTimeTaken(null);
+            } else if (event.getCheckResult().getOutput().startsWith("HTTP")) {
                 String performanceData = (String) event.getCheckResult().getPerformanceData()[0];
                 String timeData = performanceData.split("s;")[0].substring("time=".length());
-                timeTaken = Float.parseFloat(timeData) * 1000; // timeData is in seconds so we need to convert it to ms
+                instance.setTimeTaken(Float.parseFloat(timeData) * 1000); // timeData is in seconds so we need to convert it to ms
             } else if (event.getCheckResult().getOutput().startsWith("PING ")) {
                 String performanceData = (String) event.getCheckResult().getPerformanceData()[0];
                 String timeData = performanceData.split("ms;")[0].substring("rta=".length());
-                timeTaken = Float.parseFloat(timeData);
-            } else {
-                // If the event was not a successful check we have to return the instance directly because
-                // the output is also different and always can't be parsed
-                return instance.isSuccess() ? null : instance;
+                instance.setTimeTaken(Float.parseFloat(timeData));
+            } else { // Not a supported check, ignore the whole check
+                return null;
             }
-            instance.setTimeTaken(timeTaken);
         } catch (Exception ex) {
             System.out.println("Could not get time taken from performance data. Stack trace follows.");
             ex.printStackTrace();

@@ -30,7 +30,7 @@ defmodule FrontendWeb.HostView do
   def get_service_status_text(measurements, service_id) do
     case service_status(service_id, measurements) do
       :ok ->
-        "<span class=\"badge badge-success\">Online</span>"
+        "<span class=\"badge badge-success d-none\">Online</span>"
       :warning ->
         "<span class=\"badge badge-warning\">Warning</span>"
       :offline ->

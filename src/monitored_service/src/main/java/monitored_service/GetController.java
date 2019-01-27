@@ -1,4 +1,4 @@
-package web;
+package monitored_service;
 
 import Entities.Host;
 import Entities.HostDao;
@@ -29,6 +29,15 @@ public class GetController {
     public String getServices(@RequestParam("id") int id) {
         List<Service> list;
         list = hostDao.getServices(id);
+        Gson gson = new Gson();
+        return gson.toJson(list);
+    }
+
+    @RequestMapping(value = "TODO", params = "name", method = RequestMethod.GET)
+    @ResponseBody
+    public String getHostsByName(@RequestParam("name") String name) {
+        List<Host> list;
+        list = hostDao.getHostsByName(name);
         Gson gson = new Gson();
         return gson.toJson(list);
     }

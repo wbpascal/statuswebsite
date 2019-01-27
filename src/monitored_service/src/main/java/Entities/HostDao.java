@@ -1,6 +1,7 @@
 package Entities;
 
-import org.hibernate.Criteria;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Property;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 
 import java.util.ArrayList;
@@ -42,5 +43,10 @@ public class HostDao {
         Service service = new Service();
         service.setHostID(id);
         return template.findByExample(service);
+    }
+
+    public List<Host> getHostsByName(String name) {
+        DetachedCriteria criteria = DetachedCriteria.forClass(Host.class).add(Property.forName("hostName").like(name+"%"));
+        return (List<Host>) template.findByCriteria(criteria);
     }
 }

@@ -33,7 +33,7 @@ public class GetController {
         return gson.toJson(list);
     }
 
-    @RequestMapping(value = "TODO", params = "name", method = RequestMethod.GET)
+    @RequestMapping(value = "/search", params = "name", method = RequestMethod.GET)
     @ResponseBody
     public String getHostsByName(@RequestParam("name") String name) {
         List<Host> list;

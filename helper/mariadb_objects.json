@@ -1,0 +1,25 @@
+[
+  {
+    "id": "1",
+    "name": "Uni Paderborn",
+    "description": "Dummy services for UPB",
+    "icon": "https://www.uni-paderborn.de/typo3conf/ext/upb/Resources/Public/Files/gfx/logo.png",
+    "services": [
+      {
+        "id": "1",
+        "serviceName": "uni-paderborn.de",
+        "type": "http"
+      },
+      {
+        "id": "2",
+        "serviceName": "Panda",
+        "type": "http"
+      },
+      {
+        "id": "3",
+        "serviceName": "Serviceportal",
+        "type": "http"
+      }
+    ]
+  }
+]

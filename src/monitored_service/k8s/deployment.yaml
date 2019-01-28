@@ -30,6 +30,11 @@ spec:
           valueFrom:
             secretKeyRef:
               name: mariadb
+              key: mariadb-password
+        - name: MYSQL_ROOT_PASS
+          valueFrom:
+            secretKeyRef:
+              name: mariadb
               key: mariadb-root-password
         - name: JAVA_ENV
         {% if build.profile.debug|default(false) %}

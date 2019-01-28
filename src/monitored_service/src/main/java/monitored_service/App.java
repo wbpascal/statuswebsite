@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class App {
     public static void main(String[] args) {
-        Flyway flyway = Flyway.configure().dataSource("jdbc:mysql://mariadb:3306/monitored_services", "mariadb", System.getenv("MYSQL_PASS")).load();
+        Flyway flyway = Flyway.configure().dataSource("jdbc:mysql://mariadb:3306/monitored_services", "root", System.getenv("MYSQL_ROOT_PASS")).load();
         flyway.migrate();
         SpringApplication.run(App.class, args);
     }

@@ -2,7 +2,7 @@ defmodule FrontendWeb.HostView do
   use FrontendWeb, :view
 
   def get_services(host_id) do
-    Frontend.MonitoredService.get_services(host_id)
+    Frontend.MonitoredService.get_services(host_id) |> Enum.sort_by(fn service -> service["name"] end)
   end
 
   def get_mayor_services(services) do

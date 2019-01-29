@@ -6,7 +6,7 @@ public class CheckResultMessage {
     private int hostId;
     private int serviceId;
     private boolean success;
-    private float timeTaken;
+    private Float timeTaken;
     private float timestamp;
 
     public int getHostId() {
@@ -33,11 +33,11 @@ public class CheckResultMessage {
         this.success = success;
     }
 
-    public float getTimeTaken() {
+    public Float getTimeTaken() {
         return timeTaken;
     }
 
-    public void setTimeTaken(float timeTaken) {
+    public void setTimeTaken(Float timeTaken) {
         this.timeTaken = timeTaken;
     }
 
@@ -80,7 +80,7 @@ public class CheckResultMessage {
 
         try {
             // At the moment only HTTP and PING checks are supported, all other checks are ignored
-            if (!instance.getSuccess()) { // Not a successful check, ignore output
+            if (!instance.isSuccess()) { // Not a successful check, ignore output
                 instance.setTimeTaken(null);
             } else if (event.getCheckResult().getOutput().startsWith("HTTP")) {
                 String performanceData = (String) event.getCheckResult().getPerformanceData()[0];

@@ -17,16 +17,17 @@ def main():
         
 @app.route('/')
 def test():
-        rstr = "select * from http;"
+        rstr = "select * from ping4 where service != 'ping4' LIMIT 3;"
+        #rstr = "select * from http where service != 'http' LIMIT 3;"
         response  = client.query(rstr)
         return json.dumps(response.raw)
 
 
-def point_to_json(p):
+def point_to_json(sid,p):
         r = "{"
-        r += '"serviceId": {},'.format(p['min'])
+        r += '"serviceId": {},'.format(sid)
         r += '"responseTime": {},'.format(p['mean'])
-        r += '"startTime": {},"endTime": {},'.format(p['min_1'],p['max'])
+        r += '"startTime": {},"endTime": {},'.format(p['min'],p['max'])
         r += '"measurementCount": {},"outages": {},"tries": {}'.format(p['count'],0,0)
         r += "},"
         return r
@@ -37,6 +38,7 @@ def measurements():
         startTime  = request.args.get('startTime')
         endTime    = request.args.get('endTime')
         groupBy    = request.args.get('groupBy')
+        serviceId    = request.args.get('serviceId')
         # check required parameters
         if not startTime:
                 return "startTime required"
@@ -44,22 +46,21 @@ def measurements():
                 return "endTime required"
         if not groupBy:
                 return "groupBy required"
-        #optional Parameters
-        serviceId    = request.args.get('serviceId')
-        sid = ""
-        if serviceId:
-                sid = " AND service =" + serviceId
+        if not serviceId:
+                return "serviceId required"
+        
         # GROUP BY time({gb}),gb=groupBy
         # MEAN(execution_time),Count(time)
         # (COUNT(time)-SUM(reachable))
-        rstr = "select MIN(service),MEAN(execution_time),MIN(time),MAX(time),COUNT(time) from http WHERE time >= {s} AND time <= {e} {sid} GROUP BY service LIMIT 30;".format(s=startTime,e=endTime,sid=sid,gb=groupBy)
+        rstr = "select MEAN(execution_time),MIN(time),MAX(time),COUNT(time) from http"
+        rstr += "WHERE time >= {s} AND time <= {e} AND service = {sid} GROUP BY time({gb});".format(s=startTime,e=endTime,sid=serviceId,gb=groupBy)
         response  = client.query(rstr)
         result = "["
         for r in response.get_points():
-                result += point_to_json(r) + "\n"
+                result += point_to_json(serviceId,r) + "\n"
         
         result += "]"
-        return result #return json.dumps(response.raw)
+        return result
         
         
 if __name__ == "__main__":

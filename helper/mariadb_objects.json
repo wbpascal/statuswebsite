@@ -21,5 +21,28 @@
         "type": "http"
       }
     ]
+  },
+  {
+    "id": "2",
+    "name": "Statuswebsite",
+    "description": "Self status of the cluster",
+    "icon": "https://banner2.kisspng.com/20180715/bgf/kisspng-pac-man-2-the-new-adventures-black-white-pac-ma-pacman-icons-5b4b5fa9799f31.9891811315316663454982.jpg",
+    "services": [
+      {
+        "id": "4",
+        "name": "Authentication Service",
+        "type": "http"
+      },
+      {
+        "id": "5",
+        "name": "Frontend",
+        "type": "http"
+      },
+      {
+        "id": "6",
+        "name": "Token Service",
+        "type": "http"
+      }
+    ]
   }
 ]

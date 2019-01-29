@@ -55,5 +55,59 @@
         "vars.http_ssl": true
       }
     }
+  },
+  {
+    "name": "4",
+    "type": "Host",
+    "attrs": {
+      "address": "auth-service",
+      "check_command": "hostalive"
+    }
+  },
+  {
+    "name": "4!4",
+    "type": "Service",
+    "attrs": {
+      "check_command": "http",
+      "vars": {
+        "http_uri": "/healthz"
+      }
+    }
+  },
+  {
+    "name": "5",
+    "type": "Host",
+    "attrs": {
+      "address": "frontend",
+      "check_command": "hostalive"
+    }
+  },
+  {
+    "name": "5!5",
+    "type": "Service",
+    "attrs": {
+      "check_command": "http",
+      "vars": {
+        "http_uri": "/healthz"
+      }
+    }
+  },
+  {
+    "name": "6",
+    "type": "Host",
+    "attrs": {
+      "address": "token-service",
+      "check_command": "hostalive"
+    }
+  },
+  {
+    "name": "6!6",
+    "type": "Service",
+    "attrs": {
+      "check_command": "http",
+      "vars": {
+        "http_uri": "/healthz"
+      }
+    }
   }
 ]

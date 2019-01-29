@@ -36,4 +36,25 @@ defmodule Frontend.MonitoredService do
       }
     ]
   end
+
+  def search(search_string) do
+    if :rand.uniform() > 0.8 do
+      []
+    else
+      [
+        %{
+          "id" => 1,
+          "name" => "UPB",
+          "icon" =>
+            "https://www.uni-paderborn.de/typo3conf/ext/upb/Resources/Public/Files/gfx/logo.png"
+        },
+        %{
+          "id" => 42,
+          "name" => "Reddit",
+          "icon" =>
+            "https://cdn0.iconfinder.com/data/icons/social-media-2092/100/social-36-512.png"
+        }
+      ]
+    end
+  end
 end

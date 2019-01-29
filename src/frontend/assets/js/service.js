@@ -101,15 +101,22 @@ export class Service {
 
     updateStatus() {
         if (this.measurements.length === 0) {
+            // If there have been no measurements, we cannot know anything about the status
             this.setStatus("unknown");
         } else if (this.measurements[this.measurements.length - 1].y !== null) {
+            // If the last measurement was successful (response time not null), the service is deemed ok
             this.setStatus("ok");
         } else if (this.measurements.length === 1) {
+            // If the last measurement was not successful but we only have one measurement, we set the status
+            // to "warning" and need to wait for another measurement for more information
             this.setStatus("warning");
         } else {
             if (this.measurements[this.measurements.length - 2] !== null) {
+                // If only the last measurement was unsuccessful then we need to wait for more information, so we set
+                // the status to "warning"
                 this.setStatus("warning");
             } else {
+                // If we saw at least 2 unsuccessful measurements in a row, we consider the service as offline
                 this.setStatus("danger");
             }
         }
@@ -117,6 +124,7 @@ export class Service {
         this.updateStatusContainer();
     }
 
+    // Updates status badge for this service
     updateStatusContainer() {
         Array.from(this.statusContainer.getElementsByTagName("span")).forEach(child => {
             child.classList.add("d-none");

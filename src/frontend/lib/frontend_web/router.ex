@@ -17,16 +17,11 @@ defmodule FrontendWeb.Router do
     get "/", HealthController, :alive
   end
 
-  scope "/api", FrontendWeb do
-    pipe_through :api
-
-    get "/token/create", PageController, :create_token
-  end
-
   scope "/", FrontendWeb do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/search", SearchController, :index
     get "/:id", HostController, :index
   end
 end

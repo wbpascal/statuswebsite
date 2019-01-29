@@ -72,17 +72,17 @@ mariadb_connection = pymysql.connect(host=mariadb_ip,
                                      cursorclass=pymysql.cursors.DictCursor)
 try:
 	with open("mariadb_objects.json") as f:
-		with connection.cursor() as cursor:
+		with mariadb_connection.cursor() as cursor:
 			for db_object in json.load(f):
 				host_id = db_object["id"]
 				host_insert_sql = "INSERT INTO `HOSTS` (`id`, `hostName`, `description`, `icon`) VALUES (%s, %s, %s, %s)"
-				cursor.execute(sql, (db_object["id"], db_object["name"], db_object["description"], db_object["icon"]))
+				cursor.execute(host_insert_sql, (db_object["id"], db_object["name"], db_object["description"], db_object["icon"]))
 				for svc_object in db_object["services"]:
 					svc_insert_sql = "INSERT INTO `SERVICES` (`id`, `serviceName`, `hostID`, `type`) VALUES (%s, %s, %s, %s)"
 					cursor.execute(svc_insert_sql, (svc_object["id"], svc_object["name"], host_id, svc_object["type"]))
-	connection.commit()
+	mariadb_connection.commit()
 finally:
-	connection.close()
+	mariadb_connection.close()
 	
 
 

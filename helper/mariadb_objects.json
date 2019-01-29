@@ -7,17 +7,17 @@
     "services": [
       {
         "id": "1",
-        "serviceName": "uni-paderborn.de",
+        "name": "uni-paderborn.de",
         "type": "http"
       },
       {
         "id": "2",
-        "serviceName": "Panda",
+        "name": "Panda",
         "type": "http"
       },
       {
         "id": "3",
-        "serviceName": "Serviceportal",
+        "name": "Serviceportal",
         "type": "http"
       }
     ]

@@ -1,4 +1,4 @@
-FROM gradle:jdk8
+FROM gradle:5.1-jdk8-alpine
 USER root
 WORKDIR /opt/app
 
@@ -13,4 +13,4 @@ RUN chmod -R 777 /opt/app
 # Build and test project
 RUN gradle build
 
-CMD ["java", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-jar", "build/libs/monitored_service.jar"]
+ENTRYPOINT ["java", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-Djava.security.egd=file:/dev/./urandom", "-jar", "build/libs/monitored_service.jar"]

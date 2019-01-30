@@ -1,6 +1,6 @@
 <div class="jumbotron" style="margin-bottom: 70px">
-  <h1 class="display-4">Hello, world!</h1>
-  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+  <h1 class="display-4">Welcome!</h1>
+  <p class="lead">To check a website's status use the searchbar or select one of the featured services below.</p>
   <hr class="my-4">
   <div class="container">
     <form class="form-inline mx-auto row" action="/search" method="get">

@@ -8,17 +8,17 @@
       {
         "id": "1",
         "name": "uni-paderborn.de",
-        "type": "http"
+        "type": "mayor"
       },
       {
         "id": "2",
         "name": "Panda",
-        "type": "http"
+        "type": "mayor"
       },
       {
         "id": "3",
         "name": "Serviceportal",
-        "type": "http"
+        "type": "minor"
       }
     ]
   },
@@ -26,22 +26,32 @@
     "id": "2",
     "name": "Statuswebsite",
     "description": "Self status of the cluster",
-    "icon": "https://banner2.kisspng.com/20180715/bgf/kisspng-pac-man-2-the-new-adventures-black-white-pac-ma-pacman-icons-5b4b5fa9799f31.9891811315316663454982.jpg",
+    "icon": "https://cdn.onlinewebfonts.com/svg/img_573369.png",
     "services": [
       {
         "id": "4",
         "name": "Authentication Service",
-        "type": "http"
+        "type": "minor"
       },
       {
         "id": "5",
         "name": "Frontend",
-        "type": "http"
+        "type": "mayor"
       },
       {
         "id": "6",
         "name": "Token Service",
-        "type": "http"
+        "type": "minor"
+      },
+      {
+        "id": "7",
+        "name": "Measurements Service",
+        "type": "mayor"
+      },
+      {
+        "id": "8",
+        "name": "Metadata Service",
+        "type": "mayor"
       }
     ]
   }

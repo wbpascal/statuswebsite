@@ -1,6 +1,8 @@
 from influxdb import InfluxDBClient
 from datetime import datetime
 from flask import Flask,request
+from itertools import chain
+
 import json
 import os
 
@@ -21,7 +23,7 @@ def test():
         """Test method to check if the connection to the database works"""
         startDate = datetime.fromtimestamp(1548871200).strftime('%Y-%m-%dT%H:%M:%SZ')
         endDate = datetime.fromtimestamp(1548878400).strftime('%Y-%m-%dT%H:%M:%SZ')
-        rstr = "select * from ping4 where service = '8' AND unit = 'seconds' and time >= '"+startDate+"' and time <= '"+endDate+"' limit 3;"
+        rstr = "select count(state) from http where service = '1' and state != 0 group by time(1h) limit 100;"
         #rstr = "select * from http where time >= 0 AND service = '1' AND unit = 'seconds' LIMIT 30;"
         #rstr = "select MEAN(value),MIN(time),MAX(time),COUNT(time) from http "
         #rstr += "WHERE time >= {s} AND service = '{sid}' AND unit = 'seconds' GROUP BY time({gb});".format(s=0,e=endTime,sid=serviceId,gb=groupBy)
@@ -30,13 +32,13 @@ def test():
         return json.dumps(response.raw)
 
 
-def point_to_json(sid,p):
+def point_to_json(sid,p,p2):
         r = "{"
         r += '"serviceId": "{}",'.format(sid)
         r += '"responseTime": {},'.format(p['mean'])
         startDate = int(datetime.strptime(p['time'],'%Y-%m-%dT%H:%M:%SZ').timestamp())
-        r += '"startTime": {},"endTime": {},'.format(startDate,startDate) # todo: substract interval of starttime 
-        r += '"measurementCount": {},"outages": {},"tries": {}'.format(p['count'],0,0)
+        r += '"startTime": {},"endTime": {},'.format(startDate,startDate) # todo: substract interval of starttime
+        r += '"measurementCount": {},"outages": {},"tries": {}'.format(p['count'],p2,0)
         r += "},"
         return r
         
@@ -56,17 +58,21 @@ def measurements():
             return json.dumps({'success':False}), 400, {'ContentType':'application/json'} 
         startDate = datetime.fromtimestamp(int(startTime)).strftime('%Y-%m-%dT%H:%M:%SZ')
         endDate = datetime.fromtimestamp(int(endTime)).strftime('%Y-%m-%dT%H:%M:%SZ')
-        # GROUP BY time({gb}),gb=groupBy
-        # MEAN(execution_time),Count(time)
-        # (COUNT(time)-SUM(reachable))
+        
         result = "["
         for t in ["http","ping4"]:
+                # get reaction time
                 rstr = "select MEAN(value),count(value) from {} ".format(t)
                 rstr += "WHERE time >= '{s}' AND time <= '{e}' AND service = '{sid}' AND unit = 'seconds' GROUP BY time({gb});".format(s=startDate,e=endDate,sid=serviceId,gb=groupBy)
                 response  = client.query(rstr)
-                for r in response.get_points():
-                    #if r.point['count'] != "0":
-                    result += point_to_json(serviceId,r) + "\n"
+                # get success
+                rstr2 = "select count(state) from {} ".format(t)
+                rstr2 += "WHERE time >= '{s}' AND time <= '{e}' AND service = '{sid}' AND state != '0' AND state != 'null' GROUP BY time({gb});".format(s=startDate,e=endDate,sid=serviceId,gb=groupBy)
+                response2  = client.query(rstr2)
+                outGen = chain([x.point['count'] for x in response2.get_points()],iter(int,1))
+                for r,s in zip(response.get_points(), outGen):
+                    if r['count'] != "0":
+                        result += point_to_json(serviceId,r,s)
             
         result += "]"
         return result

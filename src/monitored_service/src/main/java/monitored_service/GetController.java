@@ -27,10 +27,8 @@ public class GetController {
     @RequestMapping(value = "/host/services", params = "id", method = RequestMethod.GET)
     @ResponseBody
     public String getServices(@RequestParam("id") int id) {
-        List<Service> list;
-        list = hostDao.getServices(id);
-        Gson gson = new Gson();
-        return gson.toJson(list);
+        Host host = hostDao.getById(id);
+        return new Gson().toJson(host.getServices());
     }
 
     @RequestMapping(value = "/search", params = "name", method = RequestMethod.GET)

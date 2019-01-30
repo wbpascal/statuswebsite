@@ -14,8 +14,8 @@
             <one-to-many class="Entities.Service"/>
         </set>
 
-        <property name="hostName" column="host_name" type="String"/>
-        <property name="description" column="description" type="String"/>
-        <property name="icon" column="icon" type="String"/>
+        <property name="hostName" column="host_name" type="string"/>
+        <property name="description" column="description" type="string"/>
+        <property name="icon" column="icon" type="string"/>
     </class>
 </hibernate-mapping>

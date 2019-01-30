@@ -1,18 +1,21 @@
 package Entities;
 
+import javax.persistence.JoinColumn;
+
 public class Service {
     private int id;
-    private int hostID;
+    @JoinColumn(name = "host_id", referencedColumnName = "host_id", insertable = false, updatable = false)
+    private Host host;
     private String serviceName;
     private String type;
 
     public Service() {
     }
 
-    public Service(int id, String name, int hostID, String type) {
+    public Service(int id, String name, Host host, String type) {
         this.id = id;
         this.serviceName = name;
-        this.hostID = hostID;
+        this.host = host;
         this.type = type;
     }
 
@@ -32,12 +35,12 @@ public class Service {
         this.serviceName = serviceName;
     }
 
-    public int getHostID() {
-        return hostID;
+    public Host getHost() {
+        return host;
     }
 
-    public void setHostID(int id) {
-        this.hostID = id;
+    public void setHost(Host id) {
+        this.host = id;
     }
 
     public String getType() {

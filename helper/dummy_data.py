@@ -76,10 +76,16 @@ try:
 			for db_object in json.load(f):
 				host_id = db_object["id"]
 				host_insert_sql = "INSERT INTO `HOSTS` (`id`, `hostName`, `description`, `icon`) VALUES (%s, %s, %s, %s)"
-				cursor.execute(host_insert_sql, (db_object["id"], db_object["name"], db_object["description"], db_object["icon"]))
+				try:
+					cursor.execute(host_insert_sql, (db_object["id"], db_object["name"], db_object["description"], db_object["icon"]))
+				except:
+					print "Host object {} already in database".format(host_id)
 				for svc_object in db_object["services"]:
 					svc_insert_sql = "INSERT INTO `SERVICES` (`id`, `serviceName`, `hostID`, `type`) VALUES (%s, %s, %s, %s)"
-					cursor.execute(svc_insert_sql, (svc_object["id"], svc_object["name"], host_id, svc_object["type"]))
+					try:
+						cursor.execute(svc_insert_sql, (svc_object["id"], svc_object["name"], host_id, svc_object["type"]))
+					except:
+						print "Service object {} already in database".format(svc_object["id"])
 	mariadb_connection.commit()
 finally:
 	mariadb_connection.close()

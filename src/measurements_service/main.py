@@ -34,7 +34,7 @@ def test():
 
 def point_to_json(sid,p,p2):
         startDate = int(datetime.strptime(p['time'],'%Y-%m-%dT%H:%M:%SZ').timestamp())
-        mean = int(p['mean']) if p['mean'] else 0
+        mean = float(p['mean'])*1000 if p['mean'] else 0
         r = {
                 "serviceId": sid,
                 "responseTime": mean,
@@ -69,6 +69,7 @@ def measurements():
                 rstr = "select MEAN(value),count(value) from {} ".format(t)
                 rstr += "WHERE time >= '{s}' AND time <= '{e}' AND service = '{sid}' AND unit = 'seconds' GROUP BY time({gb});".format(s=startDate,e=endDate,sid=serviceId,gb=groupBy)
                 response  = client.query(rstr)
+                
                 # get success
                 rstr2 = "select count(state) from {} ".format(t)
                 rstr2 += "WHERE time >= '{s}' AND time <= '{e}' AND service = '{sid}' AND state != '0' AND state != 'null' GROUP BY time({gb});".format(s=startDate,e=endDate,sid=serviceId,gb=groupBy)

@@ -3,12 +3,15 @@ package monitored_service;
 import Entities.Host;
 import Entities.HostDao;
 import Entities.Service;
+import monitored_service.models.json.HostModel;
+import monitored_service.models.json.ServiceModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.google.gson.*;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 @RestController
 public class GetController {
@@ -20,24 +23,25 @@ public class GetController {
     @ResponseBody
     public String getHost(@RequestParam("id") int id) {
         Host h = hostDao.getById(id);
-        Gson gson = new Gson();
-        return gson.toJson(h);
+        return new Gson().toJson(HostModel.fromEntity(h));
     }
 
     @RequestMapping(value = "/host/services", params = "id", method = RequestMethod.GET)
     @ResponseBody
     public String getServices(@RequestParam("id") int id) {
         Host host = hostDao.getById(id);
-        return new Gson().toJson(host.getServices());
+        Object[] serviceModelArray = host.getServices().stream().map(ServiceModel::fromEntity).toArray();
+        return new Gson().toJson(serviceModelArray);
     }
 
     @RequestMapping(value = "/search", params = "name", method = RequestMethod.GET)
     @ResponseBody
     public String getHostsByName(@RequestParam("name") String name) {
-        List<Host> list;
-        list = hostDao.getHostsByName(name);
-        Gson gson = new Gson();
-        return gson.toJson(list);
+        Object[] hostModelArray = hostDao.getHostsByName(name)
+                .stream()
+                .map(HostModel::fromEntity)
+                .toArray();
+        return new Gson().toJson(hostModelArray);
     }
 
     @ExceptionHandler

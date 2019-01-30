@@ -27,6 +27,7 @@ spec:
             cpu: {{build.profile.max_cpu}}
         ports:
         - containerPort: {{service.targetPort|default('80')}}
+        {% if not build.profile.debug|default(false) %}
         livenessProbe:
           httpGet:
             path: /healthz
@@ -38,7 +39,8 @@ spec:
             path: /healthz
             port: {{service.targetPort|default('80')}}
           initialDelaySeconds: 10
-          periodSeconds: 5    
+          periodSeconds: 5
+        {% endif %}
         env:
         - name: MYSQL_PASS
           valueFrom:

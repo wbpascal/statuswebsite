@@ -32,14 +32,14 @@ RUN cd assets/ && \
 	
 # Copy other static assets
 COPY priv/gettext priv/gettext/
-	
-# Digest and compress static files (Disabled atm)
-RUN if [ "$ENV" = "prod" ] ; then mix phx.digest ; fi
 
 # Copy source code to container
 COPY config config/
 COPY lib lib/
 COPY test test/
+	
+# Digest and compress static files
+RUN mix phx.digest
 
 # Compile source code
 RUN MIX_ENV=$ENV mix compile

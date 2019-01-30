@@ -19,7 +19,7 @@ defmodule Frontend.MixProject do
   def application do
     [
       mod: {Frontend.Application, []},
-      extra_applications: [:logger, :runtime_tools, :httpoison, :timex]
+      extra_applications: [:logger, :runtime_tools, :timex, :amqp]
     ]
   end
 
@@ -39,8 +39,8 @@ defmodule Frontend.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:poison, "~> 3.1"},
-      {:httpoison, "~> 1.4"},
+      {:tesla, "~> 1.2.0"},
+      {:hackney, "~> 1.14.0"},
       {:timex, "~> 3.5.0"},
       {:amqp, "~> 1.1.0"}
     ]

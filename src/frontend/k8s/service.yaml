@@ -8,8 +8,9 @@ metadata:
       kind:  Mapping
       name:  {{build.name}}_mapping
       prefix: /
-      tls: upstream
-      service: {{build.name}}:{{service.port|default('8080')}}
+      service: {{service.name}}:{{service.port|default('8080')}}
+      use_websocket: true
+      timeout_ms: 100000
       {%- if "weight" in build.profile %}
       weight: {{build.profile.weight}}
       {%- endif %}

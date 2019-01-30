@@ -15,4 +15,9 @@ defmodule FrontendWeb.MeasurementsChannel do
     FrontendWeb.Endpoint.broadcast!("measurements:#{id}", "measurement", event)
   end
 
+  def handle_new_check_event(event) do
+    Logger.debug("Received invalid check event. Event was #{inspect(event)}")
+  end
+
+
 end

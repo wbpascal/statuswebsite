@@ -1,9 +1,6 @@
 defmodule FrontendWeb.HostView do
   use FrontendWeb, :view
-
-  def get_services(host_id) do
-    Frontend.MonitoredService.get_services(host_id) |> Enum.sort_by(fn service -> service["name"] end)
-  end
+  require Logger
 
   def get_mayor_services(services) do
     services |> Enum.filter(fn %{"type" => type} -> type == "mayor" end)
@@ -13,18 +10,28 @@ defmodule FrontendWeb.HostView do
     services |> Enum.filter(fn %{"type" => type} -> type == "minor" end)
   end
 
-  def get_measurements(services) do
+  def get_measurements_json_data(service_id) do
     start_time = Timex.now() |> Timex.shift(hours: -3) |> Timex.to_unix()
     end_time = Timex.now() |> Timex.to_unix()
-    service_ids = services |> Enum.map(fn %{"id" => id} -> id end)
 
-    Frontend.MeasurementsService.get_measurements(start_time, end_time, "10m", service_ids)
+    Frontend.MeasurementsService.get_measurements(start_time, end_time, "5m", service_id)
+    |> Enum.to_list()
+    |> List.insert_at(0, create_dummy_data(service_id, start_time))
+    |> Jason.encode!()
   end
 
-  def get_measurements_json_data(measurements, service_id) do
-    measurements
-    |> Enum.filter(fn %{"serviceId" => id} -> id == service_id end)
-    |> Jason.encode!()
+  # Used so the chart is always 3 hours long
+  defp create_dummy_data(service_id, start_time) do
+    %{
+      "serviceId" => service_id,
+      "responseTime" => nil,
+      "startTime" => start_time,
+      "endTime" => start_time,
+      "measurementsCount" => 0,
+      "outages" => 0,
+      "tries" => 1
+    }
+
   end
 
   def get_service_status_text(measurements, service_id) do
@@ -56,11 +63,10 @@ defmodule FrontendWeb.HostView do
     end
   end
 
+  @doc """
+  Returns the status of the specified status. Status can be either :ok, :warning, :offline or :unkown.
+  """
   defp service_status(service_id, measurements) do
-    """
-    Returns the status of the specified status. Status can be either :ok, :warning, :offline or :unkown.
-    """
-
     last_measurement =
       measurements
       |> Enum.filter(fn %{"serviceId" => id} -> id == service_id end)

@@ -31,15 +31,22 @@ spec:
           httpGet:
             path: /healthz
             port: {{service.targetPort|default('80')}}
-          initialDelaySeconds: 40
-          periodSeconds: 5
+          initialDelaySeconds: 120
+          periodSeconds: 10
         readinessProbe:
           httpGet:
             path: /healthz
             port: {{service.targetPort|default('80')}}
-          initialDelaySeconds: 5
-          periodSeconds: 3
+          initialDelaySeconds: 20
+          periodSeconds: 10
         env:
+        - name: RABBITMQ_USER
+          value: rabbit
+        - name: RABBITMQ_PASS
+          valueFrom:
+            secretKeyRef:
+              name: rabbitmq
+              key: rabbitmq-password
         {% if not build.profile.debug|default(false) %}
         - name: MIX_ENV
           value: prod

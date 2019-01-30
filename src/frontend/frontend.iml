@@ -95,5 +95,6 @@
     <orderEntry type="library" name="plug_crypto" level="project" />
     <orderEntry type="library" name="ranch" level="project" />
     <orderEntry type="library" name="mixunit" level="project" />
+    <orderEntry type="library" name="tesla" level="project" />
   </component>
 </module>

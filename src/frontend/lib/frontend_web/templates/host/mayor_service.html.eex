@@ -10,7 +10,7 @@
 <canvas id="<%= "service-chart-#{@service["id"]}" %>" height="90"></canvas>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-    let measurements = <%= get_measurements_json_data(@measurements, @service["id"]) |> raw() %>;
+    let measurements = <%= get_measurements_json_data(@service["id"]) |> raw() %>;
     let canvas = document.getElementById("<%= "service-chart-#{@service["id"]}" %>");
     let statusContainer = document.getElementById("<%= "service-status-#{@service["id"]}" %>");
     let service = createService(<%= @service["id"] %>, canvas, statusContainer, measurements);

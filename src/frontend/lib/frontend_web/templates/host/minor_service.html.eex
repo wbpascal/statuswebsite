@@ -9,7 +9,7 @@
 </h5>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-    let measurements = <%= get_measurements_json_data(@measurements, @service["id"]) |> raw() %>;
+    let measurements = <%= get_measurements_json_data(@service["id"]) |> raw() %>;
     let statusContainer = document.getElementById("<%= "service-status-#{@service["id"]}" %>");
     let service = createService(<%= @service["id"] %>, null, statusContainer, measurements);
     service.startListeningForUpdates();

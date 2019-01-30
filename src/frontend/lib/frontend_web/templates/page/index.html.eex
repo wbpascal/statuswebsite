@@ -25,12 +25,12 @@
       <tbody>
         <tr>
           <th scope="row">1</th>
-          <td>Test Host</td>
+          <td>Uni Paderborn</td>
           <td><a class="btn btn-info" href="/1">Status</a></td>
         </tr>
         <tr>
           <th scope="row">2</th>
-          <td>Test Host 2</td>
+          <td>Cluster Status</td>
           <td><a class="btn btn-info" href="/2">Status</a></td>
         </tr>
       </tbody>

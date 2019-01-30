@@ -109,5 +109,20 @@
         "http_uri": "/healthz"
       }
     }
-  }
+  },
+  {
+    "name": "7",
+    "type": "Host",
+    "attrs": {
+      "address": "monitored-service",
+      "check_command": "hostalive"
+    }
+  },
+  {
+    "name": "7!7",
+    "type": "Service",
+    "attrs": {
+      "check_command": "ping"
+    }
+  }  
 ]

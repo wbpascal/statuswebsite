@@ -9,7 +9,7 @@
             <generator class="native"/>
         </id>
 
-        <property name="serviceName" column="service_name" type="string"/>
+        <property name="serviceName" column="serviceName" type="string"/>
         <property name="type" column="type" type="string"/>
     </class>
 </hibernate-mapping>

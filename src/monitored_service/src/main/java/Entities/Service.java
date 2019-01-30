@@ -4,7 +4,7 @@ import javax.persistence.JoinColumn;
 
 public class Service {
     private int id;
-    @JoinColumn(name = "host_id", referencedColumnName = "host_id", insertable = false, updatable = false)
+    @JoinColumn(name = "hostID", referencedColumnName = "hostID", insertable = false, updatable = false)
     private Host host;
     private String serviceName;
     private String type;

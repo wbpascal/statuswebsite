@@ -44,7 +44,7 @@ public class ServiceModel {
         ServiceModel model = new ServiceModel();
         model.setId(service.getId());
         model.setName(service.getServiceName());
-        model.setHostId(service.getHost().getId());
+        if (service.getHost() != null) model.setHostId(service.getHost().getId());
         model.setType(service.getType());
         return model;
     }

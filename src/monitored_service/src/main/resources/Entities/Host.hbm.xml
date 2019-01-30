@@ -9,12 +9,12 @@
             <generator class="native"/>
         </id>
 
-        <set name="services" table="SERVICES">
-            <key column="host_id" not-null="true"/>
+        <set name="services" table="SERVICES" lazy="false">
+            <key column="hostID" not-null="false"/>
             <one-to-many class="Entities.Service"/>
         </set>
 
-        <property name="hostName" column="host_name" type="string"/>
+        <property name="hostName" column="hostName" type="string"/>
         <property name="description" column="description" type="string"/>
         <property name="icon" column="icon" type="string"/>
     </class>

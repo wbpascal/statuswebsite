@@ -122,7 +122,22 @@
     "name": "7!7",
     "type": "Service",
     "attrs": {
-      "check_command": "ping"
+      "check_command": "ping4"
+    }
+  },
+  {
+    "name": "8",
+    "type": "Host",
+    "attrs": {
+      "address": "monitored-service",
+      "check_command": "hostalive"
+    }
+  },
+  {
+    "name": "8!8",
+    "type": "Service",
+    "attrs": {
+      "check_command": "ping4"
     }
   }  
 ]

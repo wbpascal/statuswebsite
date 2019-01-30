@@ -14,6 +14,7 @@ import org.springframework.context.annotation.ImportResource;
 @SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
 public class App {
     public static void main(String[] args) {
+        System.setProperty("maria_password", System.getenv("MYSQL_PASS"));
         Flyway flyway = Flyway.configure().dataSource("jdbc:mysql://mariadb:3306/monitored_services", "root", System.getenv("MYSQL_ROOT_PASS")).load();
         //flyway.setValidateOnMigrate(false);
         flyway.migrate();

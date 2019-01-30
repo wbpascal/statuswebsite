@@ -33,13 +33,16 @@ def test():
 
 
 def point_to_json(sid,p,p2):
-        r = "{"
-        r += '"serviceId": "{}",'.format(sid)
-        r += '"responseTime": {},'.format(p['mean'])
         startDate = int(datetime.strptime(p['time'],'%Y-%m-%dT%H:%M:%SZ').timestamp())
-        r += '"startTime": {},"endTime": {},'.format(startDate,startDate) # todo: substract interval of starttime
-        r += '"measurementCount": {},"outages": {},"tries": {}'.format(p['count'],p2,0)
-        r += "},"
+        r = {
+                "serviceId": sid,
+                "responseTime": int(p['mean']),
+                "startTime": startDate,
+                "endTime": (startDate+200), # todo: substract interval of starttime
+                "measurementCount": int(p['count']),
+                "outages": int(p2),
+                "tries": 0
+        }
         return r
         
 @app.route('/healthz')
@@ -59,7 +62,7 @@ def measurements():
         startDate = datetime.fromtimestamp(int(startTime)).strftime('%Y-%m-%dT%H:%M:%SZ')
         endDate = datetime.fromtimestamp(int(endTime)).strftime('%Y-%m-%dT%H:%M:%SZ')
         
-        result = "["
+        result = []
         for t in ["http","ping4"]:
                 # get reaction time
                 rstr = "select MEAN(value),count(value) from {} ".format(t)
@@ -71,11 +74,10 @@ def measurements():
                 response2  = client.query(rstr2)
                 outGen = chain([x.point['count'] for x in response2.get_points()],iter(int,1))
                 for r,s in zip(response.get_points(), outGen):
-                    if r['count'] != "0":
-                        result += point_to_json(serviceId,r,s)
-            
-        result += "]"
-        return result
+                    if r['count'] and r['count'] != "0":
+                        result.append(point_to_json(serviceId,r,s))
+
+        return json.dumps(result)
         
         
 if __name__ == "__main__":

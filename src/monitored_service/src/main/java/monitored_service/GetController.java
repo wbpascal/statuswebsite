@@ -39,10 +39,10 @@ public class GetController {
         return new Gson().toJson(serviceModelArray);
     }
 
-    @RequestMapping(value = "/search", params = "name", method = RequestMethod.GET)
+    @RequestMapping(value = "/search", params = "search", method = RequestMethod.GET)
     @ResponseBody
-    public String getHostsByName(@RequestParam("name") String name) {
-        Object[] hostModelArray = hostDao.getHostsByName(name)
+    public String getHostsByName(@RequestParam("search") String search) {
+        Object[] hostModelArray = hostDao.getHostsByName(search)
                 .stream()
                 .map(HostModel::fromEntity)
                 .toArray();

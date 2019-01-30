@@ -25,6 +25,20 @@ spec:
           limits:
             memory: {{build.profile.max_memory}}
             cpu: {{build.profile.max_cpu}}
+        ports:
+        - containerPort: {{service.targetPort|default('80')}}
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: {{service.targetPort|default('80')}}
+          initialDelaySeconds: 500
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: {{service.targetPort|default('80')}}
+          initialDelaySeconds: 10
+          periodSeconds: 5    
         env:
         - name: MYSQL_PASS
           valueFrom:

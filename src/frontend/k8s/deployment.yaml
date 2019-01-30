@@ -26,17 +26,17 @@ spec:
             memory: {{build.profile.max_memory}}
             cpu: {{build.profile.max_cpu}}
         ports:
-        - containerPort: 80
+        - containerPort: {{service.targetPort|default('80')}}
         livenessProbe:
           httpGet:
             path: /healthz
-            port: 80
+            port: {{service.targetPort|default('80')}}
           initialDelaySeconds: 40
           periodSeconds: 5
         readinessProbe:
           httpGet:
             path: /healthz
-            port: 80
+            port: {{service.targetPort|default('80')}}
           initialDelaySeconds: 5
           periodSeconds: 3
         env:

@@ -34,9 +34,10 @@ def test():
 
 def point_to_json(sid,p,p2):
         startDate = int(datetime.strptime(p['time'],'%Y-%m-%dT%H:%M:%SZ').timestamp())
+        mean = int(p['mean']) if p['mean'] else 0
         r = {
                 "serviceId": sid,
-                "responseTime": int(p['mean']),
+                "responseTime": mean,
                 "startTime": startDate,
                 "endTime": (startDate+200), # todo: substract interval of starttime
                 "measurementCount": int(p['count']),

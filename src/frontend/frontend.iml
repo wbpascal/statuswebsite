@@ -96,5 +96,15 @@
     <orderEntry type="library" name="ranch" level="project" />
     <orderEntry type="library" name="mixunit" level="project" />
     <orderEntry type="library" name="tesla" level="project" />
+    <orderEntry type="library" name="phoenix" level="project" />
+    <orderEntry type="library" name="phoenix_pubsub" level="project" />
+    <orderEntry type="library" name="phoenix_html" level="project" />
+    <orderEntry type="library" name="phoenix_live_reload" level="project" />
+    <orderEntry type="library" name="gettext" level="project" />
+    <orderEntry type="library" name="jason" level="project" />
+    <orderEntry type="library" name="plug_cowboy" level="project" />
+    <orderEntry type="library" name="hackney" level="project" />
+    <orderEntry type="library" name="timex" level="project" />
+    <orderEntry type="library" name="amqp" level="project" />
   </component>
 </module>

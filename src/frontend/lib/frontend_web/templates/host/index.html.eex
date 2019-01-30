@@ -1,0 +1,53 @@
+<div class="container host-status-header text-center clearfix">
+    <img src="<%= @host["icon"] %>" class="float-sm-left d-inline-block img-fluid" style="max-height: 100px" alt="Icon"/>
+    <h1 class="float-sm-right d-block d-md-inline-block h-100" style="transform: translateY(45%);">
+      <%= gettext "%{name}", name: @host["name"] %>
+    </h1>
+</div>
+
+<div class="container">
+  <div class="row" style="margin-bottom: 70px;">
+    <div id="overall-status-success" class="col alert alert-success d-none" role="alert">
+      <p class="host-alert-font font-big">All systems are operational. You should be able to reach the site.</p>
+    </div>
+    <div id="overall-status-warning" class="col alert alert-warning d-none" role="alert">
+      <p class="host-alert-font font-big">Some services may not be reachable.</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <h2>Major Services</h2>
+  </div>
+  <div class="row" style="margin-bottom: 70px;">
+    <ul class="list-group col">
+      <%= for service <- @services |> get_mayor_services() do %>
+        <li class="list-group-item">
+          <%= render @view_module, "mayor_service.html", assigns |> Map.put(:service, service) %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="row">
+    <h2>Minor Services</h2>
+  </div>
+  <div class="row">
+    <ul class="list-group col">
+      <%= for service <- @services |> get_minor_services() do %>
+        <li class="list-group-item">
+          <%= render @view_module, "minor_service.html", assigns |> Map.put(:service, service) %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div style="height: 100px"></div>
+
+</div>
+
+<script>
+  window.overallStatus = createOverallStatus();
+  document.addEventListener("DOMContentLoaded", function() {
+     window.overallStatus.updateStatus();
+  });
+</script>

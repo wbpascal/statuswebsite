@@ -1,0 +1,149 @@
+[
+  {
+    "name": "1",
+    "type": "Host",
+    "attrs": {
+      "address": "www.uni-paderborn.de",
+      "check_command": "hostalive"
+    }
+  },
+  {
+    "name": "1!1",
+    "type": "Service",
+    "attrs": {
+      "check_command": "http",
+      "vars": {
+        "http_uri": "/",
+        "vars.http_ssl": true
+      }
+    }
+  },
+  {
+    "name": "2",
+    "type": "Host",
+    "attrs": {
+      "address": "panda.uni-paderborn.de",
+      "check_command": "hostalive"
+    }
+  },
+  {
+    "name": "2!2",
+    "type": "Service",
+    "attrs": {
+      "check_command": "http",
+      "vars": {
+        "http_uri": "/",
+        "vars.http_ssl": true
+      }
+    }
+  },
+  {
+    "name": "3",
+    "type": "Host",
+    "attrs": {
+      "address": "serviceportal.uni-paderborn.de",
+      "check_command": "hostalive"
+    }
+  },
+  {
+    "name": "3!3",
+    "type": "Service",
+    "attrs": {
+      "check_command": "http",
+      "vars": {
+        "http_uri": "/",
+        "vars.http_ssl": true
+      }
+    }
+  },
+  {
+    "name": "4",
+    "type": "Host",
+    "attrs": {
+      "address": "auth-service",
+      "check_command": "hostalive"
+    }
+  },
+  {
+    "name": "4!4",
+    "type": "Service",
+    "attrs": {
+      "check_command": "http",
+      "vars": {
+        "http_uri": "/healthz"
+      }
+    }
+  },
+  {
+    "name": "5",
+    "type": "Host",
+    "attrs": {
+      "address": "frontend",
+      "check_command": "hostalive"
+    }
+  },
+  {
+    "name": "5!5",
+    "type": "Service",
+    "attrs": {
+      "check_command": "http",
+      "vars": {
+        "http_uri": "/healthz"
+      }
+    }
+  },
+  {
+    "name": "6",
+    "type": "Host",
+    "attrs": {
+      "address": "token-service",
+      "check_command": "hostalive"
+    }
+  },
+  {
+    "name": "6!6",
+    "type": "Service",
+    "attrs": {
+      "check_command": "http",
+      "vars": {
+        "http_uri": "/healthz"
+      }
+    }
+  },
+  {
+    "name": "7",
+    "type": "Host",
+    "attrs": {
+      "address": "measurements-service",
+      "check_command": "hostalive"
+    }
+  },
+  {
+    "name": "7!7",
+    "type": "Service",
+    "attrs": {
+      "check_command": "http",
+      "vars": {
+        "http_uri": "/healthz"
+      }
+    }
+  },
+  {
+    "name": "8",
+    "type": "Host",
+    "attrs": {
+      "address": "monitored-service",
+      "check_command": "hostalive"
+    }
+  },
+  {
+    "name": "8!8",
+    "type": "Service",
+    "attrs": {
+      "check_command": "http",
+      "vars": {
+        "http_uri": "/healthz"
+      }
+    }
+  }
+]

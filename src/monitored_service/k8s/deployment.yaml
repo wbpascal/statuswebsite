@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: {{build.name}}}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: {{build.name}}}
+  strategy:
+    rollingUpdate: {maxSurge: 1, maxUnavailable: 0}
+    type: RollingUpdate
+  template:
+    metadata:
+      labels: {app: {{build.name}}}
+      name: {{build.name}}
+    spec:
+      restartPolicy: Always
+      containers:
+      - image: {{build.images["Dockerfile"]}}
+        imagePullPolicy: IfNotPresent
+        name: {{build.name}}
+        resources:
+          requests:
+            memory: {{build.profile.min_memory|default(0.05)}}
+            cpu: {{build.profile.min_cpu|default(0.05)}}
+          limits:
+            memory: {{build.profile.max_memory}}
+            cpu: {{build.profile.max_cpu}}
+        ports:
+        - containerPort: {{service.targetPort|default('80')}}
+        {% if not build.profile.debug|default(false) %}
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: {{service.targetPort|default('80')}}
+          initialDelaySeconds: 500
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: {{service.targetPort|default('80')}}
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        {% endif %}
+        env:
+        - name: MYSQL_PASS
+          valueFrom:
+            secretKeyRef:
+              name: mariadb
+              key: mariadb-password
+        - name: MYSQL_ROOT_PASS
+          valueFrom:
+            secretKeyRef:
+              name: mariadb
+              key: mariadb-root-password
+        - name: JAVA_ENV
+        {% if build.profile.debug|default(false) %}
+          value: debug
+        {% else %}
+          value: prod
+        {% endif %}

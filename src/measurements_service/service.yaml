@@ -1,0 +1,23 @@
+name: measurements-service
+
+port: 80
+targetPort: 5000
+
+istio: true
+
+profiles:
+  stable:
+    max_memory: 0.5G
+    max_cpu: 0.5
+  canary:
+    max_memory: 0.5G
+    max_cpu: 0.5
+    weight: 1.0
+  default:
+    max_memory: 0.25G
+    max_cpu: 0.25
+    debug: true
+
+branches:
+  master: stable
+  dev/*: default

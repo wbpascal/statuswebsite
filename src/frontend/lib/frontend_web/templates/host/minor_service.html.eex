@@ -1,0 +1,17 @@
+<h5>
+  <%= @service["name"] %>
+  <div id="service-status-<%= @service["id"] %>" class="d-inline">
+    <span class="status-success badge badge-success d-none">Online</span>
+    <span class="status-warning badge badge-warning d-none">Warning</span>
+    <span class="status-danger badge badge-danger d-none">Offline</span>
+    <span class="status-unknown badge badge-muted d-none">Unknown</span>
+  </div>
+</h5>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    let measurements = <%= get_measurements_json_data(@service["id"]) |> raw() %>;
+    let statusContainer = document.getElementById("<%= "service-status-#{@service["id"]}" %>");
+    let service = createService(<%= @service["id"] %>, null, statusContainer, measurements);
+    service.startListeningForUpdates();
+  });
+</script>

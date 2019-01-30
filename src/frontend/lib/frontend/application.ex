@@ -9,7 +9,8 @@ defmodule Frontend.Application do
     # List all child processes to be supervised
     children = [
       # Start the endpoint when the application starts
-      FrontendWeb.Endpoint
+      FrontendWeb.Endpoint,
+      Frontend.CheckEventListener
       # Starts a worker by calling: Frontend.Worker.start_link(arg)
       # {Frontend.Worker, arg},
     ]

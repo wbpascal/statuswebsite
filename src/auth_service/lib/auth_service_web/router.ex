@@ -5,7 +5,12 @@ defmodule AuthServiceWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", AuthServiceWeb do
+  scope "/healthz", AuthServiceWeb do
+    get "/", HealthController, :alive
+  end
+
+  scope "/", AuthServiceWeb do
     pipe_through :api
+    post "/authenticate", AuthController, :authenticate
   end
 end

@@ -1,0 +1,58 @@
+[
+  {
+    "id": "1",
+    "name": "Uni Paderborn",
+    "description": "Dummy services for UPB",
+    "icon": "https://www.uni-paderborn.de/typo3conf/ext/upb/Resources/Public/Files/gfx/logo.png",
+    "services": [
+      {
+        "id": "1",
+        "name": "uni-paderborn.de",
+        "type": "mayor"
+      },
+      {
+        "id": "2",
+        "name": "Panda",
+        "type": "mayor"
+      },
+      {
+        "id": "3",
+        "name": "Serviceportal",
+        "type": "minor"
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Statuswebsite",
+    "description": "Self status of the cluster",
+    "icon": "https://cdn.onlinewebfonts.com/svg/img_573369.png",
+    "services": [
+      {
+        "id": "4",
+        "name": "Authentication Service",
+        "type": "minor"
+      },
+      {
+        "id": "5",
+        "name": "Frontend",
+        "type": "mayor"
+      },
+      {
+        "id": "6",
+        "name": "Token Service",
+        "type": "minor"
+      },
+      {
+        "id": "7",
+        "name": "Measurements Service",
+        "type": "mayor"
+      },
+      {
+        "id": "8",
+        "name": "Metadata Service",
+        "type": "mayor"
+      }
+    ]
+  }
+]

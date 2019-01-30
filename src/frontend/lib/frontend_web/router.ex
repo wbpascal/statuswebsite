@@ -13,14 +13,15 @@ defmodule FrontendWeb.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/healthz", FrontendWeb do
+    get "/", HealthController, :alive
+  end
+
   scope "/", FrontendWeb do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/search", SearchController, :index
+    get "/:id", HostController, :index
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", FrontendWeb do
-  #   pipe_through :api
-  # end
 end

@@ -1,35 +1,39 @@
-<section class="phx-hero">
-  <h1><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h1>
-  <p>A productive web framework that<br/>does not compromise speed and maintainability.</p>
-</section>
-
-<section class="row">
-  <article class="column">
-    <h2>Resources</h2>
-    <ul>
-      <li>
-        <a href="https://hexdocs.pm/phoenix/overview.html">Guides &amp; Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix/blob/v1.4/CHANGELOG.md">v1.4 Changelog</a>
-      </li>
-    </ul>
-  </article>
-  <article class="column">
-    <h2>Help</h2>
-    <ul>
-      <li>
-        <a href="https://elixirforum.com/c/phoenix-forum">Forum</a>
-      </li>
-      <li>
-        <a href="https://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on Freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">Twitter @elixirphoenix</a>
-      </li>
-    </ul>
-  </article>
-</section>
+<div class="jumbotron" style="margin-bottom: 70px">
+  <h1 class="display-4">Welcome!</h1>
+  <p class="lead">To check a website's status use the searchbar or select one of the featured services below.</p>
+  <hr class="my-4">
+  <div class="container">
+    <form class="form-inline mx-auto row" action="/search" method="get">
+      <input class="form-control col col-8 col-md-6 mr-2 offset-md-2" type="search" name="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-info col col-3 col-md-2 " type="submit">Search</button>
+    </form>
+  </div>
+</div>
+<div class="container">
+  <div class="row" style="margin-bottom: 10px">
+    <h2>Featured Services</h2>
+  </div>
+  <div class="row">
+    <table class="table table-striped col">
+      <thead style="background-color: #343a40 !important; color: #fff;">
+        <tr>
+          <th scope="col" style="width: 20%;">#</th>
+          <th scope="col" style="width: 67%;">Name</th>
+          <th scope="col" align="right" >Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Uni Paderborn</td>
+          <td><a class="btn btn-info" href="/1">Status</a></td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Cluster Status</td>
+          <td><a class="btn btn-info" href="/2">Status</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

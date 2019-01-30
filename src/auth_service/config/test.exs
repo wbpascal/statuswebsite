@@ -8,3 +8,11 @@ config :auth_service, AuthServiceWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+# Configure your database
+config :auth_service, AuthService.Repo,
+  username: "root",
+  password: "",
+  database: "auth_service_test",
+  hostname: "localhost",
+  pool: Ecto.Adapters.SQL.Sandbox

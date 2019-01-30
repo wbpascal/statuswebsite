@@ -1,5 +1,7 @@
 FROM bitwalker/alpine-elixir-phoenix:latest
 
+ARG ENV=dev
+
 # Install newest phoenix version
 RUN mix archive.uninstall phx_new --force
 RUN mix archive.install hex phx_new 1.4.0 --force
@@ -25,21 +27,22 @@ COPY assets/static assets/static/
 
 # Compile webpack assets
 RUN cd assets/ && \
-    npm run deploy
+    if [ "$ENV" = "prod" ] ; then WEBPACK_ENV=production ; else WEBPACK_ENV=development ; fi && \
+    node node_modules/webpack/bin/webpack.js --mode $WEBPACK_ENV
 	
 # Copy other static assets
 COPY priv/gettext priv/gettext/
-	
-# Digest and compress static files (Disabled atm)
-# RUN mix phx.digest
 
 # Copy source code to container
 COPY config config/
 COPY lib lib/
 COPY test test/
+	
+# Digest and compress static files
+RUN mix phx.digest
 
 # Compile source code
-RUN mix compile
+RUN MIX_ENV=$ENV mix compile
 
 EXPOSE 80
 CMD ["mix", "phx.server"]

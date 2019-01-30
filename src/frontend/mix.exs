@@ -19,7 +19,7 @@ defmodule Frontend.MixProject do
   def application do
     [
       mod: {Frontend.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :timex, :amqp]
     ]
   end
 
@@ -32,14 +32,17 @@ defmodule Frontend.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.4.0"},
+      {:phoenix, "~> 1.4"},
       {:phoenix_pubsub, "~> 1.1"},
       {:phoenix_html, "~> 2.11"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-	  {:poison, "~> 3.1"}
+      {:tesla, "~> 1.2.0"},
+      {:hackney, "~> 1.14.0"},
+      {:timex, "~> 3.5.0"},
+      {:amqp, "~> 1.1.0"}
     ]
   end
 end

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.url">jdbc:mysql://mariadb:3306/monitored_services</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.username">maria</property>
+        <property name="hibernate.connection.password">${maria_password}</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MariaDB102Dialect</property>
+        <property name="show_sql">true</property>
+        <mapping resource="Entities/Host.hbm.xml"/>
+        <mapping resource="Entities/Service.hbm.xml"/>
+    </session-factory>
+</hibernate-configuration>

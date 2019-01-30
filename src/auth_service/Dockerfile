@@ -12,9 +12,7 @@ RUN mix do deps.get, deps.compile
 	
 # Copy other static assets
 COPY priv/gettext priv/gettext/
-	
-# Digest and compress static files
-RUN mix phx.digest
+COPY priv/repo priv/repo/
 
 # Copy source code to container
 COPY config config/
@@ -25,4 +23,4 @@ COPY test test/
 RUN mix compile
 
 EXPOSE 80
-CMD ["mix", "phx.server"]
+CMD mix do ecto.create, ecto.migrate, phx.server

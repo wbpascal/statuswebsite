@@ -10,7 +10,7 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :auth_service, AuthServiceWeb.Endpoint,
-  http: [:inet6, port: System.get_env("PORT") || 80],
+  http: [port: 80],
   url: [host: "auth-service", port: 80],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
@@ -68,4 +68,4 @@ config :logger, level: :info
 
 # Finally import the config/prod.secret.exs which should be versioned
 # separately.
-import_config "prod.secret.exs"
+# import_config "prod.secret.exs"

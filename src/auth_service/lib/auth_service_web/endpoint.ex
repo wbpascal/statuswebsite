@@ -38,7 +38,7 @@ defmodule AuthServiceWeb.Endpoint do
   plug Plug.Session,
     store: :cookie,
     key: "_auth_service_key",
-    signing_salt: "p80oFDgK"
+    signing_salt: "UoUFMaYH"
 
   plug AuthServiceWeb.Router
 end
